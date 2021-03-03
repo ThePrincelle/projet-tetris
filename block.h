@@ -4,7 +4,7 @@
 #ifndef _BALL_H_
 #define _BALL_H_
 
-class Ball {
+class Block {
     // Properties
     private:
         Vec2 m_Pos;
@@ -14,8 +14,8 @@ class Ball {
     public:
 
         // Constructors
-        Ball();
-        Ball(double x, double y, double vx, double vy);
+        Block();
+        Block(double x, double y, double vx, double vy);
 
         // Getters
         Vec2 GetPosition() const;

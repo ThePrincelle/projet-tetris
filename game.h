@@ -1,6 +1,6 @@
 
 #include "surface.h"
-#include "ball.h"
+#include "block.h"
 #include "timer.h"
 #include "window_surface.h"
 #include <string>
@@ -16,7 +16,7 @@ class Game {
     WindowSurface *m_WinSurf;
     Surface *m_Sheet;
     const Uint8 *keys;
-    Ball m_Ball;
+    Block m_Block;
 
     unordered_map<string, Sprite> m_Sprites;
     bool b_Quit;

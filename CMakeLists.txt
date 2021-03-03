@@ -28,9 +28,7 @@ endfunction()
 
 ADD_PRG(TARGET TP_SDL SOURCES base_tp1.cpp)
 
-ADD_PRG(TARGET TP_CPP_SDL SOURCES window_surface.h window_surface.cpp surface.h surface.cpp sprite.h sprite.cpp vec2.h vec2.cpp ball.h ball.cpp timer.h timer.cpp game.h game.cpp tp1.cpp)
-
-ADD_PRG(TARGET TP_2 SOURCES tp2.cpp)
+ADD_PRG(TARGET TP_CPP_SDL SOURCES window_surface.h window_surface.cpp surface.h surface.cpp sprite.h sprite.cpp vec2.h vec2.cpp block.h block.cpp timer.h timer.cpp game.h game.cpp tp1.cpp)
 
 
 
