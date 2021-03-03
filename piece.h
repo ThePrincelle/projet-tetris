@@ -9,6 +9,7 @@ class piece {
     private:
         Form m_current_combination;
         vector<Form> m_Forms;
+        int  m_id_Combination;
         bool m_static;
         Vec2 m_Vel;
 

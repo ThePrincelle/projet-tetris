@@ -23,6 +23,7 @@ class Form {
         Vec2 GetPosition() const;
         Vec2 GetVelocity() const;
         Block *GetBlocks();
+        int GetLastLine();
 
         // Setters
         void SetPosition(Vec2 pos);
@@ -32,6 +33,7 @@ class Form {
         void AddForce(Vec2 force);
         void MultiplyForce(Vec2 force);
         void Move(double dt);
+
 };
 
 
