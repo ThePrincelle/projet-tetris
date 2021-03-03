@@ -33,9 +33,11 @@ void Block::SetVelocity(Vec2 vel) {
 void Block::AddForce(Vec2 force) {
     m_Vel += force;
 }
+
 void Block::MultiplyForce(Vec2 force) {
     m_Vel *= force;
 }
+
 void Block::Move(double dt) {
     Vec2 temp_vec = m_Vel * dt;
     m_Pos += temp_vec;
