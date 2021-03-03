@@ -9,7 +9,7 @@ class Block {
     private:
         Vec2 m_Pos;
         Vec2 m_Vel;
-
+        int m_color;
 
     public:
 
@@ -20,6 +20,7 @@ class Block {
         // Getters
         Vec2 GetPosition() const;
         Vec2 GetVelocity() const;
+        int Getcolor();
 
         // Setters
         void SetPosition(Vec2 pos);
