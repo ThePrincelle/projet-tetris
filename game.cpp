@@ -43,11 +43,21 @@ void Game::Input()
         // m_Block.SetPosition(m_Window.GetCenter() -
         // m_Sprites["Block"].GetCenter());
     }
+    else if (keys[SDL_SCANCODE_DOWN])
+    {
+        if(!m_Sprint) {
+            m_Block.MultiplyForce(Vec2(1, 10));// unable sprint
+            m_Sprint = true;
+        }
 
-    // Block Movement
-    m_Block.AddForce(
-            Vec2(0.2 * keys[SDL_SCANCODE_RIGHT] - 0.2 * keys[SDL_SCANCODE_LEFT],
-                  0.2 * keys[SDL_SCANCODE_DOWN] - 0.2 * keys[SDL_SCANCODE_UP]));
+    }
+    else
+    {
+        if(m_Sprint) {
+            m_Block.MultiplyForce(Vec2(1, 0.1));// disable sprint
+            m_Sprint = false;
+        }
+    }
 }
 
 void Game::Draw(double dt)
@@ -61,10 +71,12 @@ void Game::Draw(double dt)
     // collision bord
     int w, h;
     SDL_GetWindowSize(m_Window, &w, &h);
-    if ((m_Block.GetPosition().x < 1) || (m_Block.GetPosition().x > (w - 25)))
-        m_Block.MultiplyForce(Vec2(-1, 1));
-    if ((m_Block.GetPosition().y < 1) || (m_Block.GetPosition().y > (h - 25)))
-        m_Block.MultiplyForce(Vec2(1, -1));
+    if (m_Block.GetPosition().y > (h - 25))
+        m_Block.SetVelocity(Vec2(0, 0));
+
+    if(m_Block.GetPosition().y < 1) {
+        //End game
+    }
 }
 
 void Game::Loop()
