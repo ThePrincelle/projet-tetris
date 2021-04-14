@@ -25,13 +25,10 @@ function(ADD_PRG)
 	target_compile_definitions(${ADD_PRG_TARGET} PUBLIC _USE_MATH_DEFINES)
 endfunction()
 
-
-ADD_PRG(TARGET TP_SDL SOURCES base_tp1.cpp)
-
-ADD_PRG(TARGET TP_CPP_SDL SOURCES window_surface.h window_surface.cpp surface.h surface.cpp sprite.h sprite.cpp vec2.h vec2.cpp block.h block.cpp timer.h timer.cpp game.h game.cpp tp1.cpp)
+ADD_PRG(TARGET TP_CPP_SDL SOURCES window_surface.h window_surface.cpp surface.h surface.cpp sprite.h sprite.cpp vec2.h vec2.cpp block.h block.cpp timer.h timer.cpp game.h game.cpp main.cpp)
 
 
 
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/sprites.bmp
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/sprites-Tetris.bmp
 	DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/)
 

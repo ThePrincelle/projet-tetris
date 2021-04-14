@@ -4,12 +4,17 @@
 void Game::Init()
 {
     m_Window =
-            SDL_CreateWindow("TP1", SDL_WINDOWPOS_UNDEFINED,
+            SDL_CreateWindow("Tetris", SDL_WINDOWPOS_UNDEFINED,
                              SDL_WINDOWPOS_UNDEFINED, 600, 600, SDL_WINDOW_SHOWN);
-    m_Sheet = new Surface("./sprites.bmp");
+    /**m_Sheet = new Surface("./sprites.bmp");
     m_Sprites = {
             {"background", Sprite(m_Sheet, {0, 128, 96, 128})},
             {"Block", Sprite(m_Sheet, {0, 96, 24, 24})},
+    };**/
+    m_Sheet = new Surface("./sprites-Tetris.bmp");
+    m_Sprites = {
+            {"background", Sprite(m_Sheet, {0, 128, 96, 128})},
+            {"Block", Sprite(m_Sheet, {4, 3, 24, 24})},
     };
     m_WinSurf = new WindowSurface(m_Window, m_Sprites["background"]);
     b_Quit = false;
@@ -17,7 +22,7 @@ void Game::Init()
     int w, h;
     SDL_GetWindowSize(m_Window, &w, &h);
     m_Block.SetPosition(Vec2(w / 2, h / 2));
-    m_Block.SetVelocity(Vec2(40, 25));
+    m_Block.SetVelocity(Vec2(0, 24));
 }
 
 void Game::Input()
