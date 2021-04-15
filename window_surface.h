@@ -1,13 +1,11 @@
-#ifndef _WINDOW_SURFACE_
-#define _WINDOW_SURFACE_
-
-
 #include <SDL.h>
 #include "surface.h"
 #include "sprite.h"
 #include "vec2.h"
 
-class Sprite;
+#ifndef _WINDOW_SURFACE_
+#define _WINDOW_SURFACE_
+
 
 class WindowSurface : public Surface
 {

@@ -1,6 +1,6 @@
 
 #include "surface.h"
-#include "block.h"
+#include "piece.h"
 #include "timer.h"
 #include "window_surface.h"
 #include <string>
@@ -16,7 +16,8 @@ class Game {
     WindowSurface *m_WinSurf;
     Surface *m_Sheet;
     const Uint8 *keys;
-    Block m_Block;
+    PieceFactory* m_PieceFactory;
+    Piece* m_CurrentPiece;
     float m_Force;
     int m_Sprint;
 
@@ -26,7 +27,7 @@ class Game {
 public:
 
     // Constructor
-    Game() : m_Window(nullptr), m_WinSurf(nullptr), m_Sheet(nullptr) ,keys(nullptr), b_Quit(false), m_Force(1), m_Sprint(false){}
+    Game() : m_Window(nullptr), m_WinSurf(nullptr), m_Sheet(nullptr) ,keys(nullptr), b_Quit(false), m_PieceFactory(nullptr), m_CurrentPiece(nullptr), m_Force(1), m_Sprint(false){}
     ~Game();
 
     // Actions

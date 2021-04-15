@@ -22,23 +22,40 @@ Vec2 Block::GetVelocity() const
 }
 
 // Setters
-void Block::SetPosition(Vec2 pos) {
+void Block::SetPosition(Vec2 &pos) {
     m_Pos = pos;
 }
-void Block::SetVelocity(Vec2 vel) {
+void Block::SetVelocity(Vec2 &vel) {
     m_Vel = vel;
 }
 
 // Actions
-void Block::AddForce(Vec2 force) {
+void Block::AddForce(Vec2 &force) {
     m_Vel += force;
 }
 
-void Block::MultiplyForce(Vec2 force) {
+void Block::MultiplyForce(Vec2 &force) {
     m_Vel *= force;
 }
 
 void Block::Move(double dt) {
     Vec2 temp_vec = m_Vel * dt;
     m_Pos += temp_vec;
+}
+
+void Block::Sprint()
+{
+    Vec2 sprint = Vec2(1, 20);
+    this->MultiplyForce(sprint);
+}
+
+void Block::StopSprint()
+{
+    Vec2 stopSprint = Vec2(1, 0.2);
+    this->MultiplyForce(stopSprint);
+}
+
+void Block::SelfPaint(WindowSurface* winSurf, Sprite color)
+{
+    winSurf->Paint(color,m_Pos);
 }

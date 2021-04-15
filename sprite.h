@@ -5,8 +5,6 @@
 #ifndef _SPRITE_H_
 #define _SPRITE_H_
 
-class WindSurface;
-
 class Sprite
 {
     // Properties

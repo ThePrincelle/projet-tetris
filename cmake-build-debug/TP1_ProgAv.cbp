@@ -92,6 +92,12 @@
 		<Unit filename="/home/hugo/CLionProjects/projet-tetris/block.h">
 			<Option target="TP_CPP_SDL"/>
 		</Unit>
+		<Unit filename="/home/hugo/CLionProjects/projet-tetris/form.cpp">
+			<Option target="TP_CPP_SDL"/>
+		</Unit>
+		<Unit filename="/home/hugo/CLionProjects/projet-tetris/form.h">
+			<Option target="TP_CPP_SDL"/>
+		</Unit>
 		<Unit filename="/home/hugo/CLionProjects/projet-tetris/game.cpp">
 			<Option target="TP_CPP_SDL"/>
 		</Unit>
@@ -99,6 +105,12 @@
 			<Option target="TP_CPP_SDL"/>
 		</Unit>
 		<Unit filename="/home/hugo/CLionProjects/projet-tetris/main.cpp">
+			<Option target="TP_CPP_SDL"/>
+		</Unit>
+		<Unit filename="/home/hugo/CLionProjects/projet-tetris/piece.cpp">
+			<Option target="TP_CPP_SDL"/>
+		</Unit>
+		<Unit filename="/home/hugo/CLionProjects/projet-tetris/piece.h">
 			<Option target="TP_CPP_SDL"/>
 		</Unit>
 		<Unit filename="/home/hugo/CLionProjects/projet-tetris/sprite.cpp">

@@ -5,8 +5,6 @@
 #ifndef _SURFACE_H_
 #define _SURFACE_H_
 
-class Sprite;
-
 class Surface {
     protected:
         SDL_Surface *m_Surface;

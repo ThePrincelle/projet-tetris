@@ -1,5 +1,8 @@
 
 #include "vec2.h"
+#include "window_surface.h"
+#include "surface.h"
+#include "sprite.h"
 
 #ifndef _BALL_H_
 #define _BALL_H_
@@ -9,7 +12,6 @@ class Block {
     private:
         Vec2 m_Pos;
         Vec2 m_Vel;
-        int m_color;
 
     public:
 
@@ -20,16 +22,18 @@ class Block {
         // Getters
         Vec2 GetPosition() const;
         Vec2 GetVelocity() const;
-        int Getcolor();
 
         // Setters
-        void SetPosition(Vec2 pos);
-        void SetVelocity(Vec2 vel);
+        void SetPosition(Vec2 &pos);
+        void SetVelocity(Vec2 &vel);
 
         // Actions
-        void AddForce(Vec2 force);
-        void MultiplyForce(Vec2 force);
+        void AddForce(Vec2 &force);
+        void MultiplyForce(Vec2 &force);
         void Move(double dt);
+        void Sprint();
+        void StopSprint();
+        void SelfPaint(WindowSurface* winSurf, Sprite color);
 
 
 };
