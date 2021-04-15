@@ -14,9 +14,9 @@ void Game::Init()
             {"BlockOrange", Sprite(m_Sheet, {29, 3, 21, 21})},
             {"BlockYellow", Sprite(m_Sheet, {51, 3, 21, 21})},
             {"BlockGreen", Sprite(m_Sheet, {73, 3, 21, 21})},
-            {"BlockLBlue", Sprite(m_Sheet, {73, 3, 21, 21})},
-            {"BlockDBlue", Sprite(m_Sheet, {73, 3, 21, 21})},
-            {"BlockMagenta", Sprite(m_Sheet, {73, 3, 21, 21})},
+            {"BlockLBlue", Sprite(m_Sheet, {95, 3, 21, 21})},
+            {"BlockDBlue", Sprite(m_Sheet, {117, 3, 21, 21})},
+            {"BlockMagenta", Sprite(m_Sheet, {139, 3, 21, 21})},
     };
     m_WinSurf = new WindowSurface(m_Window, m_Sprites["background"]);
     b_Quit = false;
