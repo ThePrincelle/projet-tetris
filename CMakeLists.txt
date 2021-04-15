@@ -29,6 +29,6 @@ ADD_PRG(TARGET TP_CPP_SDL SOURCES window_surface.h window_surface.cpp surface.h 
 
 
 
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/sprites-Tetris.bmp
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/textures.bmp
 	DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/)
 

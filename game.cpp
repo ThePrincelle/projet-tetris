@@ -7,17 +7,23 @@ void Game::Init()
     m_Window =
             SDL_CreateWindow("Tetris", SDL_WINDOWPOS_UNDEFINED,
                              SDL_WINDOWPOS_UNDEFINED, 600, 600, SDL_WINDOW_SHOWN);
-    m_Sheet = new Surface("./sprites-Tetris.bmp");
+    m_Sheet = new Surface("./textures.bmp");
     m_Sprites = {
             {"background", Sprite(m_Sheet, {0, 128, 96, 128})},
-            {"BlockGreen", Sprite(m_Sheet, {4, 3, 24, 24})},
+            {"BlockRed", Sprite(m_Sheet, {7, 3, 21, 21})},
+            {"BlockOrange", Sprite(m_Sheet, {29, 3, 21, 21})},
+            {"BlockYellow", Sprite(m_Sheet, {51, 3, 21, 21})},
+            {"BlockGreen", Sprite(m_Sheet, {73, 3, 21, 21})},
+            {"BlockLBlue", Sprite(m_Sheet, {73, 3, 21, 21})},
+            {"BlockDBlue", Sprite(m_Sheet, {73, 3, 21, 21})},
+            {"BlockMagenta", Sprite(m_Sheet, {73, 3, 21, 21})},
     };
     m_WinSurf = new WindowSurface(m_Window, m_Sprites["background"]);
     b_Quit = false;
 
     int w, h;
     SDL_GetWindowSize(m_Window, &w, &h);
-    Vec2 startPos = Vec2(w / 2 - 21, h / 2 - 84);
+    Vec2 startPos = Vec2(w / 2 - 21, 0);
     Vec2 startVel = Vec2(0, 24);
     m_PieceFactory = PieceFactory::GetPieceFactory();
     m_PieceFactory->SetStartPos(startPos);
