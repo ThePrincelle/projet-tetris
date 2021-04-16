@@ -19,7 +19,7 @@ void Game::Init()
             {"BlockLBlue", Sprite(m_Sheet, {95, 3, 21, 21})},
             {"BlockDBlue", Sprite(m_Sheet, {117, 3, 21, 21})},
             {"BlockMagenta", Sprite(m_Sheet, {139, 3, 21, 21})},
-            {"BlockGray", Sprite(m_Sheet, {161, 3, 22, 22})},
+            {"BlockGray", Sprite(m_Sheet, {161, 3, 21, 21})},
     };
     m_WinSurf = new WindowSurface(m_Window, m_Sprites["background"]);
 
@@ -77,12 +77,12 @@ void Game::Input()
     else if (keys[SDL_SCANCODE_RIGHT])
     {
         float max = m_CurrentPiece->GetMaxRightPosition().x;
-        if((w/2 + 21*10) > (int)round(m_CurrentPiece->GetMaxRightPosition().x + 21))
+        if(((w/2.0 + 21.0 * 6.0)-1.2) > (int)round(m_CurrentPiece->GetMaxRightPosition().x + 21))
             m_CurrentPiece->MoveRight();
     }
     else if (keys[SDL_SCANCODE_LEFT])
     {
-        if((w/2 - 21*10) < (int)round(m_CurrentPiece->GetMaxLeftPosition().x - 21))
+        if(((w/2.0 - 21.0 * 4.0)-1.2) < (int)round(m_CurrentPiece->GetMaxLeftPosition().x - 21))
             m_CurrentPiece->MoveLeft();
 
     }
@@ -106,12 +106,12 @@ void Game::Draw(double dt)
     m_WinSurf->DrawBackground();
 
     // --- Draw playGround --- Begin
-    Vec2 beginLimitLeft = Vec2((float)((w/2.0 - 21.0 * 10.0)-0.5), h-20*21 -  3*21);
-    Vec2 beginLimitRight = Vec2((float)((w/2.0 + 21.0 * 10.0)+0.5), h-20*21 - 3*21);
-    Vec2 beginLimitBottom = Vec2((float)(w/2.0 - 21.0 * 10.0), h - 2*21 );
+    Vec2 beginLimitLeft = Vec2((float)((w/2.0 - 21.0 * 5.0)-1.2), h-20*21 -  3*21);
+    Vec2 beginLimitRight = Vec2((float)((w/2.0 + 21.0 * 6.0)-1.2), h-20*21 - 3*21);
+    Vec2 beginLimitBottom = Vec2((float)((w/2.0 - 21.0 * 5.0)-1.2), h - 2*21 );
     m_WinSurf->Paint(m_Sprites["BlockGray"],beginLimitLeft , 1, 20*21);
     m_WinSurf->Paint(m_Sprites["BlockGray"],beginLimitRight , 1, 20*21);
-    m_WinSurf->Paint(m_Sprites["BlockGray"],beginLimitBottom , 20*21, 1);
+    m_WinSurf->Paint(m_Sprites["BlockGray"],beginLimitBottom , 11*21, 1);
     // --- Draw playGround --- End
 
     //Current Piece Action
@@ -120,13 +120,9 @@ void Game::Draw(double dt)
     {
        m_Sprint = false;
        m_CurrentPiece =  m_pieceBag.GetNextPiece();
-       Vec2 startPos = m_PieceFactory->GetStartPos();
-       Vec2 startVel = m_PieceFactory->GetStartVel();
-       m_CurrentPiece->SetPosition(startPos);
-       m_CurrentPiece->SetVelocity(startVel);
-       //m_CurrentPiece->MultiplyForce(m_Force);
+       m_PieceFactory->ReloadPosition(m_CurrentPiece);
+       m_PieceFactory->ReloadVelocity(m_CurrentPiece,m_Force);
        m_CurrentPiece->SetStatic(false);
-       Vec2 vel = m_CurrentPiece->GetVelocity();
     }
 
     //All Piece action

@@ -155,7 +155,9 @@ void Form::SelfPaint(WindowSurface* winSurf, Sprite color)
 void Form::Lock()
 {
     Vec2 lock = Vec2(0, 0);
-    m_Pos = Vec2 (roundf(m_Pos.x), roundf(m_Pos.y));
+    float x = roundf(m_Pos.x) - fmod(roundf(m_Pos.x),21);
+    float y = roundf(m_Pos.y) - fmod(roundf(m_Pos.y),21) + 12;
+    m_Pos = Vec2 (x,y);
     m_Vel *= lock;
     for(int i = 0; i<16; i++)
         if(m_Blocks[i] != nullptr)

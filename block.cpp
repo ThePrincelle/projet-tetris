@@ -67,6 +67,8 @@ void Block::SelfPaint(WindowSurface* winSurf, Sprite color)
 void Block::Lock()
 {
     Vec2 lock = Vec2(0, 0);
+    float x = roundf(m_Pos.x) - fmod(roundf(m_Pos.x),21);
+    float y = roundf(m_Pos.y) - fmod(roundf(m_Pos.y),21) + 12;
     MultiplyForce(lock);
-    m_Pos = Vec2 (roundf(m_Pos.x), roundf(m_Pos.y));
+    m_Pos = Vec2 (x, y);
 }

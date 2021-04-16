@@ -217,10 +217,10 @@ Piece* PieceFactory::CreatePiece(TetrisPiece typePiece, double x, double y, doub
         else if (typePiece == TetrisPiece::J ) {
 
             vBlock formJ1Blocks = {
+                    nullptr, nullptr, nullptr, nullptr,
+                    nullptr, nullptr, nullptr, nullptr,
                     (new Block()), nullptr, nullptr, nullptr,
                     (new Block()), (new Block()), (new Block()), nullptr,
-                    nullptr, nullptr, nullptr, nullptr,
-                    nullptr, nullptr, nullptr, nullptr,
             };
             forms.push_back(new  Form(x, y, vx, vy, formJ1Blocks));
 
