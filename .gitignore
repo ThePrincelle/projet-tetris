@@ -145,3 +145,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 cmake-build-debug
+
+TP_CPP_SDL
