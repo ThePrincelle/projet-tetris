@@ -57,6 +57,14 @@ void Game::Input()
         }
 
     }
+    else if (keys[SDL_SCANCODE_RIGHT])
+    {
+        m_CurrentPiece->RotateRight();
+    }
+    else if (keys[SDL_SCANCODE_LEFT])
+    {
+        m_CurrentPiece->RotateLeft();
+    }
     else
     {
         if(m_Sprint) {
@@ -74,27 +82,34 @@ void Game::Draw(double dt)
     m_CurrentPiece->SelfPaint(m_WinSurf);
 
     m_CurrentPiece->Move(dt);
-    Vec2 stopVel = Vec2(0, 0);
 
     // collision bord
     int w, h;
     SDL_GetWindowSize(m_Window, &w, &h);
     if (m_CurrentPiece->GetMaxDownPosition().y > (float)(h - 25))
-        m_CurrentPiece->MultiplyForce(stopVel);
+        if(!m_CurrentPiece->GetStatus())
+            m_CurrentPiece->Lock();
 
     if(m_CurrentPiece->GetMaxUpPosition().y < 1) {
+        if(!m_CurrentPiece->GetStatus()){
+
+        }
         //End game
     }
 }
 
 void Game::Loop()
 {
+
     while (!b_Quit) {
         Timer::GetInstance()->Tick();
 
         // TODO: Change Event Handling
         SDL_Event event;
-        SDL_PollEvent(&event);
+        while (SDL_PollEvent(&event))
+        {
+            Input();
+        }
         switch (event.type) {
             case SDL_QUIT:
                 b_Quit = true;
@@ -102,8 +117,6 @@ void Game::Loop()
             default:
                 break;
         }
-
-        Input();
 
         Draw(Timer::GetInstance()->GetDeltaTime());
 

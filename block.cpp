@@ -59,3 +59,9 @@ void Block::SelfPaint(WindowSurface* winSurf, Sprite color)
 {
     winSurf->Paint(color,m_Pos);
 }
+
+void Block::Lock()
+{
+    Vec2 lock = Vec2(0, 0);
+    this->MultiplyForce(lock);
+}

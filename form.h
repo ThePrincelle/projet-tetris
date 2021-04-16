@@ -46,7 +46,8 @@ class Form {
         void Move(double dt);
         void Sprint();
         void StopSprint();
-        void SelfPaint(WindowSurface* winSurf, Sprite &color);
+        void SelfPaint(WindowSurface* winSurf, Sprite color);
+        void Lock();
 
 };
 

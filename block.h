@@ -34,6 +34,7 @@ class Block {
         void Sprint();
         void StopSprint();
         void SelfPaint(WindowSurface* winSurf, Sprite color);
+        void Lock();
 
 
 };

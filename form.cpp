@@ -111,9 +111,16 @@ void Form::StopSprint()
             m_Blocks[i]->StopSprint();
 }
 
-void Form::SelfPaint(WindowSurface* winSurf, Sprite &color)
+void Form::SelfPaint(WindowSurface* winSurf, Sprite color)
 {
     for(int i = 0; i<16; i++)
         if(m_Blocks[i] != nullptr)
             m_Blocks[i]->SelfPaint(winSurf, color);
+}
+
+void Form::Lock()
+{
+    for(int i = 0; i<16; i++)
+        if(m_Blocks[i] != nullptr)
+            m_Blocks[i]->Lock();
 }

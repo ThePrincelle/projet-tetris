@@ -49,6 +49,7 @@ class Piece  {
         void Sprint();
         void StopSprint();
         void SelfPaint(WindowSurface* winSurf);
+        void Lock();
 
 
 };

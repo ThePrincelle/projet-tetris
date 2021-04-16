@@ -62,6 +62,9 @@ void Piece::SetPosition(Vec2 &pos) {
 void Piece::SetVelocity(Vec2 &vel) {
     for(Form* temp_form : m_Forms)
         temp_form->SetVelocity(vel);
+
+    if(vel.x != 0 || vel.y != 0)
+        m_Static = false;
 }
 
 void Piece::AddCombination(Form *form)
@@ -73,6 +76,9 @@ void Piece::AddCombination(Form *form)
 void Piece::AddForce(Vec2 &force) {
     for(Form* temp_form : m_Forms)
         temp_form->AddForce(force);
+
+    if(force.x != 0 || force.y != 0)
+        m_Static = false;
 }
 
 void Piece::MultiplyForce(Vec2 &force) {
@@ -81,26 +87,29 @@ void Piece::MultiplyForce(Vec2 &force) {
 }
 
 void Piece::Move(double dt) {
+    if(!m_Static)
     for(Form* temp_form : m_Forms)
         temp_form->Move(dt);
 }
 
 void Piece::RotateRight()
 {
-    Form* current_Form = this->GetCurrentForm();
-    if((m_IdCombination + 1) > m_Forms.size() )
-        m_IdCombination = 1;
-    else
-        m_IdCombination++;
+    if(!m_Static) {
+        if ((m_IdCombination + 1) >= m_Forms.size())
+            m_IdCombination = 0;
+        else
+            m_IdCombination++;
+    }
 }
 
 void Piece::RotateLeft()
 {
-    Form* current_Form = this->GetCurrentForm();
-    if((m_IdCombination - 1) < 0 )
-        m_IdCombination = (int)m_Forms.size();
-    else
-        m_IdCombination--;
+    if(!m_Static) {
+        if ((m_IdCombination - 1) < 0)
+            m_IdCombination = (int) m_Forms.size() - 1;
+        else
+            m_IdCombination--;
+    }
 }
 
 void Piece::Sprint()
@@ -117,7 +126,15 @@ void Piece::StopSprint()
 
 void Piece::SelfPaint(WindowSurface* winSurf)
 {
-    this->GetCurrentForm()->SelfPaint(winSurf, m_Color);
+    Form* currentForm =  this->GetCurrentForm();
+    currentForm->SelfPaint(winSurf, m_Color);
+}
+
+void Piece::Lock()
+{
+    m_Static = true;
+    for(Form* temp_form : m_Forms)
+        temp_form->Lock();
 }
 
 PieceFactory* PieceFactory::m_PieceFactory = nullptr;
