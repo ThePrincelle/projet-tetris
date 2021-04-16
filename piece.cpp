@@ -86,10 +86,25 @@ void Piece::MultiplyForce(Vec2 &force) {
         temp_form->MultiplyForce(force);
 }
 
-void Piece::Move(double dt) {
+void Piece::Fall(double dt) {
     if(!m_Static)
     for(Form* temp_form : m_Forms)
-        temp_form->Move(dt);
+        temp_form->Fall(dt);
+}
+
+void  Piece::MoveRight()
+{
+    Vec2 temp_vec = Vec2(21,0);
+    if(!m_Static)
+        for(Form* temp_form : m_Forms)
+            temp_form->MoveRight(temp_vec);
+}
+void  Piece::MoveLeft()
+{
+    Vec2 temp_vec = Vec2(-21,0);
+    if(!m_Static)
+        for(Form* temp_form : m_Forms)
+            temp_form->MoveLeft(temp_vec);
 }
 
 void Piece::RotateRight()

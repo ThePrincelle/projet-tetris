@@ -30,7 +30,9 @@ class Block {
         // Actions
         void AddForce(Vec2 &force);
         void MultiplyForce(Vec2 &force);
-        void Move(double dt);
+        void Fall(double dt);
+        void MoveRight(Vec2& velR);
+        void MoveLeft(Vec2& velL);
         void Sprint();
         void StopSprint();
         void SelfPaint(WindowSurface* winSurf, Sprite color);

@@ -89,16 +89,34 @@ void Form::MultiplyForce(Vec2 &force) {
             m_Blocks[i]->MultiplyForce(force);
 }
 
-void Form::Move(double dt) {
-    Vec2 temp_vec = m_Vel * dt;
+void Form::Fall(double dt) {
+    Vec2 temp_vec = Vec2(0,m_Vel.y * dt);
     m_Pos += temp_vec;
     for(int i = 0; i<16; i++)
         if(m_Blocks[i] != nullptr)
-            m_Blocks[i]->Move(dt);
+            m_Blocks[i]->Fall(dt);
+}
+
+void Form::MoveRight(Vec2 & velR)
+{
+    m_Pos += velR;
+    for(int i = 0; i<16; i++)
+        if(m_Blocks[i] != nullptr)
+            m_Blocks[i]->MoveRight(velR);
+}
+
+void Form::MoveLeft(Vec2 & velL)
+{
+    m_Pos += velL;
+    for(int i = 0; i<16; i++)
+        if(m_Blocks[i] != nullptr)
+            m_Blocks[i]->MoveLeft(velL);
 }
 
 void Form::Sprint()
 {
+    Vec2 sprint = Vec2(0, 20);
+    m_Vel *= sprint;
     for(int i = 0; i<16; i++)
         if(m_Blocks[i] != nullptr)
             m_Blocks[i]->Sprint();
@@ -106,6 +124,8 @@ void Form::Sprint()
 
 void Form::StopSprint()
 {
+    Vec2 stopSprint = Vec2(0, 0.05);
+    m_Vel *= stopSprint;
     for(int i = 0; i<16; i++)
         if(m_Blocks[i] != nullptr)
             m_Blocks[i]->StopSprint();
@@ -120,6 +140,8 @@ void Form::SelfPaint(WindowSurface* winSurf, Sprite color)
 
 void Form::Lock()
 {
+    Vec2 lock = Vec2(0, 0);
+    m_Vel *= lock;
     for(int i = 0; i<16; i++)
         if(m_Blocks[i] != nullptr)
             m_Blocks[i]->Lock();

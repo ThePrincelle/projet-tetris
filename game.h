@@ -19,7 +19,8 @@ class Game {
     PieceFactory* m_PieceFactory;
     Piece* m_CurrentPiece;
     float m_Force;
-    int m_Sprint;
+    bool m_Sprint;
+    int m_NbSprint;
 
     unordered_map<string, Sprite> m_Sprites;
     bool b_Quit;
@@ -27,7 +28,7 @@ class Game {
 public:
 
     // Constructor
-    Game() : m_Window(nullptr), m_WinSurf(nullptr), m_Sheet(nullptr) ,keys(nullptr), b_Quit(false), m_PieceFactory(nullptr), m_CurrentPiece(nullptr), m_Force(1), m_Sprint(false){}
+    Game() : m_Window(nullptr), m_WinSurf(nullptr), m_Sheet(nullptr) ,keys(nullptr), b_Quit(false), m_PieceFactory(nullptr), m_CurrentPiece(nullptr), m_Force(1), m_Sprint(false), m_NbSprint(0){}
     ~Game();
 
     // Actions

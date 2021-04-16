@@ -54,20 +54,31 @@ void Game::Input()
         if(!m_Sprint) {
             m_CurrentPiece->Sprint();// unable sprint
             m_Sprint = true;
+            m_NbSprint++;
         }
 
     }
-    else if (keys[SDL_SCANCODE_RIGHT])
+    else if (keys[SDL_SCANCODE_UP])
     {
         m_CurrentPiece->RotateRight();
     }
-    else if (keys[SDL_SCANCODE_LEFT])
+    /*else if (keys[SDL_SCANCODE_])
     {
         m_CurrentPiece->RotateLeft();
+    }*/
+    else if (keys[SDL_SCANCODE_RIGHT])
+    {
+        m_CurrentPiece->MoveRight();
+    }
+    else if (keys[SDL_SCANCODE_LEFT])
+    {
+        m_CurrentPiece->MoveLeft();
     }
     else
     {
         if(m_Sprint) {
+            if(m_NbSprint == 2)
+                m_NbSprint = 0;
             m_CurrentPiece->StopSprint();// disable sprint
             m_Sprint = false;
         }
@@ -81,7 +92,7 @@ void Game::Draw(double dt)
 
     m_CurrentPiece->SelfPaint(m_WinSurf);
 
-    m_CurrentPiece->Move(dt);
+    m_CurrentPiece->Fall(dt);
 
     // collision bord
     int w, h;

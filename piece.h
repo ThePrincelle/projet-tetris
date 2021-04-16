@@ -43,7 +43,9 @@ class Piece  {
         // Actions
         void AddForce(Vec2 &force);
         void MultiplyForce(Vec2 &force);
-        void Move(double dt);
+        void Fall(double dt);
+        void MoveRight();
+        void MoveLeft();
         void RotateRight();
         void RotateLeft();
         void Sprint();
