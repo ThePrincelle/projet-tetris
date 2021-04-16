@@ -48,6 +48,16 @@ Vec2 Piece::GetMaxUpPosition()
     return this->GetCurrentForm()->GetMaxUpPosition();
 }
 
+Vec2 Piece::GetMaxRightPosition()
+{
+    return this->GetCurrentForm()->GetMaxRightPosition();
+}
+
+Vec2 Piece::GetMaxLeftPosition()
+{
+    return this->GetCurrentForm()->GetMaxLeftPosition();
+}
+
 Vec2 Piece::GetVelocity()
 {
     return this->GetCurrentForm()->GetVelocity();

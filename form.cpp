@@ -47,6 +47,28 @@ Vec2 Form::GetMaxUpPosition()
     return Vec2(0,0);
 }
 
+Vec2 Form::GetMaxRightPosition()
+{
+    int modulo = 3;
+    do {
+        for (int i = 3; i < 16; i++)
+            if (i % 4 == modulo)
+                if (m_Blocks[i] != nullptr)
+                    return m_Blocks[i]->GetPosition();
+        modulo--;
+    }while(modulo != 0);
+    return Vec2(0,0); //Erreur
+}
+
+Vec2 Form::GetMaxLeftPosition()
+{
+    for(int i = 0; i<16; i++)
+        if(i%4 == 0)
+            if(m_Blocks[i] != nullptr)
+                return m_Blocks[i]->GetPosition();
+    return Vec2(0,0); //Erreur
+}
+
 Vec2 Form::GetVelocity() const
 {
     return m_Vel;

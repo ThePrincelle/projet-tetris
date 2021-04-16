@@ -33,6 +33,8 @@ class Form {
         Vec2 GetPosition() const;
         Vec2 GetMaxDownPosition();
         Vec2 GetMaxUpPosition();
+        Vec2 GetMaxRightPosition();
+        Vec2 GetMaxLeftPosition();
         Vec2 GetVelocity() const;
         vBlock GetBlocks() const;
 

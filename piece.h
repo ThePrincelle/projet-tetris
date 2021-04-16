@@ -29,6 +29,8 @@ class Piece  {
         Vec2 GetVelocity();
         Vec2 GetMaxDownPosition();
         Vec2 GetMaxUpPosition();
+        Vec2 GetMaxRightPosition();
+        Vec2 GetMaxLeftPosition();
         vBlock GetBlocks();
         Form* GetCurrentForm();
         vForm GetCombinations() const;

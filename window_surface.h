@@ -28,7 +28,8 @@ class WindowSurface : public Surface
 
         // Actions
         void DrawBackground();
-        void Paint(Sprite &sprite, Vec2 position);
+        void Paint(Sprite &sprite, Vec2& position);
+        void Paint(Sprite &sprite, Vec2& position, float w, float h);
 };
 
 #endif

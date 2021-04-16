@@ -8,7 +8,9 @@ void Game::Init()
             SDL_CreateWindow("Tetris", SDL_WINDOWPOS_UNDEFINED,
                              SDL_WINDOWPOS_UNDEFINED, 600, 600, SDL_WINDOW_SHOWN);
     m_Sheet = new Surface("./textures.bmp");
+    auto background = new Surface("./background.bmp");
     m_Sprites = {
+            //{"background", Sprite(background, {0, 0, 600, 600})},
             {"background", Sprite(m_Sheet, {0, 128, 96, 128})},
             {"BlockRed", Sprite(m_Sheet, {7, 3, 21, 21})},
             {"BlockOrange", Sprite(m_Sheet, {29, 3, 21, 21})},
@@ -17,8 +19,10 @@ void Game::Init()
             {"BlockLBlue", Sprite(m_Sheet, {95, 3, 21, 21})},
             {"BlockDBlue", Sprite(m_Sheet, {117, 3, 21, 21})},
             {"BlockMagenta", Sprite(m_Sheet, {139, 3, 21, 21})},
+            {"BlockGray", Sprite(m_Sheet, {161, 3, 22, 22})},
     };
     m_WinSurf = new WindowSurface(m_Window, m_Sprites["background"]);
+
     b_Quit = false;
 
     int w, h;
@@ -38,14 +42,15 @@ void Game::Input()
     keys = SDL_GetKeyboardState(nullptr);
     Vec2 increaseVel = Vec2(1,m_Force);
 
+    int w, h;
+    SDL_GetWindowSize(m_Window, &w, &h);
+
     // Quit Game
     if ((b_Quit |= (keys[SDL_SCANCODE_ESCAPE] != 0)))
         return;
 
     // Center Block
     if (keys[SDL_SCANCODE_SPACE]) {
-        int w, h;
-        SDL_GetWindowSize(m_Window, &w, &h);
         m_PieceFactory->ReloadPosition(m_CurrentPiece);
         m_PieceFactory->ReloadVelocity(m_CurrentPiece,m_Force);
     }
@@ -54,7 +59,6 @@ void Game::Input()
         if(!m_Sprint) {
             m_CurrentPiece->Sprint();// unable sprint
             m_Sprint = true;
-            m_NbSprint++;
         }
 
     }
@@ -68,17 +72,19 @@ void Game::Input()
     }*/
     else if (keys[SDL_SCANCODE_RIGHT])
     {
-        m_CurrentPiece->MoveRight();
+        float max = m_CurrentPiece->GetMaxRightPosition().x;
+        if((w/2 + 21*10) > (int)round(m_CurrentPiece->GetMaxRightPosition().x + 21))
+            m_CurrentPiece->MoveRight();
     }
     else if (keys[SDL_SCANCODE_LEFT])
     {
-        m_CurrentPiece->MoveLeft();
+        if((w/2 - 21*10) < (int)round(m_CurrentPiece->GetMaxLeftPosition().x - 21))
+            m_CurrentPiece->MoveLeft();
+
     }
     else
     {
         if(m_Sprint) {
-            if(m_NbSprint == 2)
-                m_NbSprint = 0;
             m_CurrentPiece->StopSprint();// disable sprint
             m_Sprint = false;
         }
@@ -88,16 +94,24 @@ void Game::Input()
 
 void Game::Draw(double dt)
 {
+    int w, h;
+    SDL_GetWindowSize(m_Window, &w, &h);
+
     m_WinSurf->DrawBackground();
+
+    Vec2 beginLimitLeft = Vec2((w/2 - 21 * 10)+0.5, 0);
+    Vec2 beginLimitRight = Vec2((w/2 + 21 * 10)-0.5, 0);
+    Vec2 beginLimitBottom = Vec2((w/2 - 21 * 10), 21*21);
+    m_WinSurf->Paint(m_Sprites["BlockGray"],beginLimitLeft , 1, 20*21);
+    m_WinSurf->Paint(m_Sprites["BlockGray"],beginLimitRight , 1, 20*21);
+    m_WinSurf->Paint(m_Sprites["BlockGray"],beginLimitBottom , 20*21, 1);
 
     m_CurrentPiece->SelfPaint(m_WinSurf);
 
     m_CurrentPiece->Fall(dt);
 
     // collision bord
-    int w, h;
-    SDL_GetWindowSize(m_Window, &w, &h);
-    if (m_CurrentPiece->GetMaxDownPosition().y > (float)(h - 25))
+    if (m_CurrentPiece->GetMaxDownPosition().y > (float)(20*21))
         if(!m_CurrentPiece->GetStatus())
             m_CurrentPiece->Lock();
 
