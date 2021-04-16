@@ -30,11 +30,11 @@ void Block::SetVelocity(Vec2 &vel) {
 }
 
 // Actions
-void Block::AddForce(Vec2 &force) {
+void Block::AddForce(Vec2 force) {
     m_Vel += force;
 }
 
-void Block::MultiplyForce(Vec2 &force) {
+void Block::MultiplyForce(Vec2 force) {
     m_Vel *= force;
 }
 
@@ -43,24 +43,20 @@ void Block::Fall(double dt) {
     m_Pos += temp_vec;
 }
 
-void Block::MoveRight(Vec2& velR) {
+void Block::Move(Vec2& velR) {
     m_Pos += velR;
-}
-
-void Block::MoveLeft(Vec2& velL) {
-    m_Pos += velL;
 }
 
 void Block::Sprint()
 {
     Vec2 sprint = Vec2(1, 20);
-    this->MultiplyForce(sprint);
+    MultiplyForce(sprint);
 }
 
 void Block::StopSprint()
 {
     Vec2 stopSprint = Vec2(1, 0.05);
-    this->MultiplyForce(stopSprint);
+    MultiplyForce(stopSprint);
 }
 
 void Block::SelfPaint(WindowSurface* winSurf, Sprite color)
@@ -71,5 +67,6 @@ void Block::SelfPaint(WindowSurface* winSurf, Sprite color)
 void Block::Lock()
 {
     Vec2 lock = Vec2(0, 0);
-    this->MultiplyForce(lock);
+    MultiplyForce(lock);
+    m_Pos = Vec2 (roundf(m_Pos.x), roundf(m_Pos.y));
 }

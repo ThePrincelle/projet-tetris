@@ -7,11 +7,11 @@
 #include <unordered_map>
 #include "vec2.h"
 #include "form.h"
-#include "block.h"
+
 
 using namespace std;
-typedef std::vector<Form*> vForm;
-enum class TetrisPiece { I, J, L, O, S, Z, T};
+typedef vector<Form*> vForm;
+enum TetrisPiece { I, J, L, O, S, Z, T, Count};
 class Piece  {
 
     friend class PieceFactory;
@@ -25,6 +25,7 @@ class Piece  {
 
     public:
         // Getters
+        vForm GetCombinations() const;
         Vec2 GetPosition();
         Vec2 GetVelocity();
         Vec2 GetMaxDownPosition();
@@ -33,9 +34,7 @@ class Piece  {
         Vec2 GetMaxLeftPosition();
         vBlock GetBlocks();
         Form* GetCurrentForm();
-        vForm GetCombinations() const;
-        bool GetStatus() const;
-
+        bool IsStatic();
 
         // Setters
         void SetPosition(Vec2 &pos);
@@ -43,21 +42,24 @@ class Piece  {
         void AddCombination(Form* form);
 
         // Actions
-        void AddForce(Vec2 &force);
-        void MultiplyForce(Vec2 &force);
-        void Fall(double dt);
+        void AddForce(Vec2 force);
+        void MultiplyForce(Vec2 force);
+        void Fall(double dt, int windowHeight);
         void MoveRight();
+        void Move(Vec2 pos);
         void MoveLeft();
         void RotateRight();
         void RotateLeft();
         void Sprint();
         void StopSprint();
         void SelfPaint(WindowSurface* winSurf);
+        void SetStatic(bool isStatic);
         void Lock();
 
 
 };
 
+typedef vector<Piece*> vPiece;
 class PieceFactory
 {
     public:
@@ -70,7 +72,7 @@ class PieceFactory
             }
 
     private:
-        vector<Piece*> m_AllPiece;
+        vPiece m_AllPiece;
         Vec2 m_StartPos;
         Vec2 m_StartVel;
         unordered_map<string, Sprite> m_Sprites;
@@ -80,16 +82,19 @@ class PieceFactory
         PieceFactory(PieceFactory const&)    = delete;
         void operator=(PieceFactory const&)  = delete;
 
-        Piece* CreatePiece(TetrisPiece typePiece, float force);
+        Piece* CreatePiece(TetrisPiece typePiece, double x, double y);
         Piece* CreatePiece(TetrisPiece typePiece, double x, double y, double vx, double vy);
-        Vec2 GetStartPos();
-        Vec2 GetStartVel();
+        Vec2 GetStartPos() const;
+        Vec2 GetStartVel() const;
+        vPiece GetAllPiece();
+
         void SetStartPos(Vec2 &pos);
         void SetStartVel(Vec2 &vel);
         unordered_map<string, Sprite> GetSprites();
         void SetSprites(unordered_map<string, Sprite> &sprites);
         void ReloadPosition(Piece *piece);
         void ReloadVelocity(Piece *piece, float force);
+        void DrawAllPiece(WindowSurface *winSurf);
 
 };
 

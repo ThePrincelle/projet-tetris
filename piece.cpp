@@ -20,7 +20,7 @@ Form *Piece::GetCurrentForm()
 
 vBlock Piece::GetBlocks()
 {
-    return this->GetCurrentForm()->GetBlocks();
+    return GetCurrentForm()->GetBlocks();
 }
 
 vForm Piece::GetCombinations() const
@@ -28,39 +28,39 @@ vForm Piece::GetCombinations() const
     return m_Forms;
 }
 
-bool Piece::GetStatus() const
+bool Piece::IsStatic()
 {
     return m_Static;
 }
 
 Vec2 Piece::GetPosition()
 {
-    return this->GetCurrentForm()->GetPosition();
+    return GetCurrentForm()->GetPosition();
 }
 
 Vec2 Piece::GetMaxDownPosition()
 {
-    return this->GetCurrentForm()->GetMaxDownPosition();
+    return GetCurrentForm()->GetMaxDownPosition();
 }
 
 Vec2 Piece::GetMaxUpPosition()
 {
-    return this->GetCurrentForm()->GetMaxUpPosition();
+    return GetCurrentForm()->GetMaxUpPosition();
 }
 
 Vec2 Piece::GetMaxRightPosition()
 {
-    return this->GetCurrentForm()->GetMaxRightPosition();
+    return GetCurrentForm()->GetMaxRightPosition();
 }
 
 Vec2 Piece::GetMaxLeftPosition()
 {
-    return this->GetCurrentForm()->GetMaxLeftPosition();
+    return GetCurrentForm()->GetMaxLeftPosition();
 }
 
 Vec2 Piece::GetVelocity()
 {
-    return this->GetCurrentForm()->GetVelocity();
+    return GetCurrentForm()->GetVelocity();
 }
 
 // Setters
@@ -83,7 +83,7 @@ void Piece::AddCombination(Form *form)
 }
 
 // Actions
-void Piece::AddForce(Vec2 &force) {
+void Piece::AddForce(Vec2 force) {
     for(Form* temp_form : m_Forms)
         temp_form->AddForce(force);
 
@@ -91,15 +91,26 @@ void Piece::AddForce(Vec2 &force) {
         m_Static = false;
 }
 
-void Piece::MultiplyForce(Vec2 &force) {
+void Piece::MultiplyForce(Vec2 force) {
     for(Form* temp_form : m_Forms)
         temp_form->MultiplyForce(force);
 }
 
-void Piece::Fall(double dt) {
+void Piece::Fall(double dt, int windowHeight) {
     if(!m_Static)
-    for(Form* temp_form : m_Forms)
-        temp_form->Fall(dt);
+        for(Form* temp_form : m_Forms)
+            temp_form->Fall(dt);
+    // Collision bords
+    if (GetMaxDownPosition().y > (float)( windowHeight - 3*21))
+        if(!m_Static)
+            Lock();
+
+    if(GetMaxUpPosition().y < 1) {
+        if(!m_Static){
+
+        }
+        //End game
+    }
 }
 
 void  Piece::MoveRight()
@@ -107,14 +118,22 @@ void  Piece::MoveRight()
     Vec2 temp_vec = Vec2(21,0);
     if(!m_Static)
         for(Form* temp_form : m_Forms)
-            temp_form->MoveRight(temp_vec);
+            temp_form->Move(temp_vec);
 }
+
+void  Piece::Move( Vec2 pos)
+{
+    if(!m_Static)
+        for(Form* temp_form : m_Forms)
+            temp_form->Move(pos);
+}
+
 void  Piece::MoveLeft()
 {
     Vec2 temp_vec = Vec2(-21,0);
     if(!m_Static)
         for(Form* temp_form : m_Forms)
-            temp_form->MoveLeft(temp_vec);
+            temp_form->Move(temp_vec);
 }
 
 void Piece::RotateRight()
@@ -139,20 +158,27 @@ void Piece::RotateLeft()
 
 void Piece::Sprint()
 {
-    for(Form* temp_form : m_Forms)
-        temp_form->Sprint();
+    if(!m_Static)
+        for(Form* temp_form : m_Forms)
+            temp_form->Sprint();
 }
 
 void Piece::StopSprint()
 {
-    for(Form* temp_form : m_Forms)
-        temp_form->StopSprint();
+    if(!m_Static)
+        for(Form* temp_form : m_Forms)
+            temp_form->StopSprint();
 }
 
 void Piece::SelfPaint(WindowSurface* winSurf)
 {
-    Form* currentForm =  this->GetCurrentForm();
+    Form* currentForm =  GetCurrentForm();
     currentForm->SelfPaint(winSurf, m_Color);
+}
+
+void Piece::SetStatic(bool isStatic)
+{
+    m_Static= isStatic;
 }
 
 void Piece::Lock()
@@ -352,17 +378,24 @@ Piece* PieceFactory::CreatePiece(TetrisPiece typePiece, double x, double y, doub
     return new_Piece;
 }
 
-Piece* PieceFactory::CreatePiece(TetrisPiece typePiece, float force)
+Piece* PieceFactory::CreatePiece(TetrisPiece typePiece, double x, double y)
 {
-    return this->CreatePiece(typePiece, m_StartPos.x, m_StartPos.y, m_StartVel.x, m_StartVel.y*force);
+    Piece *  new_piece = CreatePiece(typePiece, x, y, m_StartVel.x, m_StartVel.y);
+    new_piece->SetStatic(true);
+
+    return new_piece;
 }
 
-Vec2 PieceFactory::GetStartPos() {
+Vec2 PieceFactory::GetStartPos() const {
     return m_StartPos;
 }
 
-Vec2 PieceFactory::GetStartVel() {
+Vec2 PieceFactory::GetStartVel() const {
     return m_StartVel;
+}
+
+vPiece PieceFactory::GetAllPiece() {
+    return m_AllPiece;
 }
 
 void PieceFactory::SetStartPos(Vec2 &pos) {
@@ -392,4 +425,10 @@ void PieceFactory::ReloadVelocity(Piece *piece, float force)
 {
     Vec2 new_Vel = Vec2(m_StartVel.x,m_StartVel.y*force);
     piece->SetVelocity(new_Vel);
+}
+
+void PieceFactory::DrawAllPiece(WindowSurface *winSurf)
+{
+    for(Piece* temp_piece : m_AllPiece)
+        temp_piece->SelfPaint(winSurf);
 }

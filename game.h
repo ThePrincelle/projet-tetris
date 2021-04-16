@@ -2,6 +2,7 @@
 #include "surface.h"
 #include "piece.h"
 #include "timer.h"
+#include "pieceBag.h"
 #include "window_surface.h"
 #include <string>
 #include <unordered_map>
@@ -20,6 +21,7 @@ class Game {
     Piece* m_CurrentPiece;
     float m_Force;
     bool m_Sprint;
+    PieceBag m_pieceBag;
 
     unordered_map<string, Sprite> m_Sprites;
     bool b_Quit;

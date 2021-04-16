@@ -119,20 +119,12 @@ void Form::Fall(double dt) {
             m_Blocks[i]->Fall(dt);
 }
 
-void Form::MoveRight(Vec2 & velR)
+void Form::Move(Vec2 & vel)
 {
-    m_Pos += velR;
+    m_Pos += vel;
     for(int i = 0; i<16; i++)
         if(m_Blocks[i] != nullptr)
-            m_Blocks[i]->MoveRight(velR);
-}
-
-void Form::MoveLeft(Vec2 & velL)
-{
-    m_Pos += velL;
-    for(int i = 0; i<16; i++)
-        if(m_Blocks[i] != nullptr)
-            m_Blocks[i]->MoveLeft(velL);
+            m_Blocks[i]->Move(vel);
 }
 
 void Form::Sprint()
@@ -163,6 +155,7 @@ void Form::SelfPaint(WindowSurface* winSurf, Sprite color)
 void Form::Lock()
 {
     Vec2 lock = Vec2(0, 0);
+    m_Pos = Vec2 (roundf(m_Pos.x), roundf(m_Pos.y));
     m_Vel *= lock;
     for(int i = 0; i<16; i++)
         if(m_Blocks[i] != nullptr)

@@ -6,7 +6,7 @@ void Game::Init()
 {
     m_Window =
             SDL_CreateWindow("Tetris", SDL_WINDOWPOS_UNDEFINED,
-                             SDL_WINDOWPOS_UNDEFINED, 600, 600, SDL_WINDOW_SHOWN);
+                             SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN);
     m_Sheet = new Surface("./textures.bmp");
     auto background = new Surface("./background.bmp");
     m_Sprites = {
@@ -33,14 +33,18 @@ void Game::Init()
     m_PieceFactory->SetStartPos(startPos);
     m_PieceFactory->SetStartVel(startVel);
     m_PieceFactory->SetSprites(m_Sprites);
+    m_pieceBag = PieceBag(m_PieceFactory, m_Window);
 
-    m_CurrentPiece = m_PieceFactory->CreatePiece(TetrisPiece::S, m_Force);
+    m_CurrentPiece = m_pieceBag.GetNextPiece();
+    m_CurrentPiece->SetPosition(startPos);
+    m_CurrentPiece->SetVelocity(startVel);
+    m_CurrentPiece->SetStatic(false);
 }
 
 void Game::Input()
 {
     keys = SDL_GetKeyboardState(nullptr);
-    Vec2 increaseVel = Vec2(1,m_Force);
+    //Vec2 increaseVel = Vec2(1,m_Force);
 
     int w, h;
     SDL_GetWindowSize(m_Window, &w, &h);
@@ -85,42 +89,48 @@ void Game::Input()
     else
     {
         if(m_Sprint) {
-            m_CurrentPiece->StopSprint();// disable sprint
+            if(!m_CurrentPiece->IsStatic())
+                m_CurrentPiece->StopSprint();// disable sprint
             m_Sprint = false;
         }
-        m_CurrentPiece->MultiplyForce(increaseVel);
     }
 }
 
 void Game::Draw(double dt)
 {
+    //Init Window size
     int w, h;
     SDL_GetWindowSize(m_Window, &w, &h);
 
+    //Draw Back Ground
     m_WinSurf->DrawBackground();
 
-    Vec2 beginLimitLeft = Vec2((w/2 - 21 * 10)+0.5, 0);
-    Vec2 beginLimitRight = Vec2((w/2 + 21 * 10)-0.5, 0);
-    Vec2 beginLimitBottom = Vec2((w/2 - 21 * 10), 21*21);
+    // --- Draw playGround --- Begin
+    Vec2 beginLimitLeft = Vec2((float)((w/2.0 - 21.0 * 10.0)-0.5), h-20*21 -  3*21);
+    Vec2 beginLimitRight = Vec2((float)((w/2.0 + 21.0 * 10.0)+0.5), h-20*21 - 3*21);
+    Vec2 beginLimitBottom = Vec2((float)(w/2.0 - 21.0 * 10.0), h - 2*21 );
     m_WinSurf->Paint(m_Sprites["BlockGray"],beginLimitLeft , 1, 20*21);
     m_WinSurf->Paint(m_Sprites["BlockGray"],beginLimitRight , 1, 20*21);
     m_WinSurf->Paint(m_Sprites["BlockGray"],beginLimitBottom , 20*21, 1);
+    // --- Draw playGround --- End
 
-    m_CurrentPiece->SelfPaint(m_WinSurf);
-
-    m_CurrentPiece->Fall(dt);
-
-    // collision bord
-    if (m_CurrentPiece->GetMaxDownPosition().y > (float)(20*21))
-        if(!m_CurrentPiece->GetStatus())
-            m_CurrentPiece->Lock();
-
-    if(m_CurrentPiece->GetMaxUpPosition().y < 1) {
-        if(!m_CurrentPiece->GetStatus()){
-
-        }
-        //End game
+    //Current Piece Action
+    m_CurrentPiece->Fall(dt, h);
+    if(m_CurrentPiece->IsStatic())
+    {
+       m_Sprint = false;
+       m_CurrentPiece =  m_pieceBag.GetNextPiece();
+       Vec2 startPos = m_PieceFactory->GetStartPos();
+       Vec2 startVel = m_PieceFactory->GetStartVel();
+       m_CurrentPiece->SetPosition(startPos);
+       m_CurrentPiece->SetVelocity(startVel);
+       //m_CurrentPiece->MultiplyForce(m_Force);
+       m_CurrentPiece->SetStatic(false);
+       Vec2 vel = m_CurrentPiece->GetVelocity();
     }
+
+    //All Piece action
+    m_PieceFactory->DrawAllPiece(m_WinSurf);
 }
 
 void Game::Loop()
