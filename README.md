@@ -16,7 +16,7 @@ Sommaire :
 
 Pour pouvoir compiler et lancer ce projet, certains applicatifs doivent être installés sur votre machine.
 
-A savoir, seul un environnement Linux est pris en charge, en effet la librairie SDL à quelques failles sur MacOS.
+A savoir, seul un environnement Linux est pris en charge pour le moment, en effet la librairie SDL à quelques failles sur les autres OS notamment MacOS.
 
 ```bash
 sudo apt install cmake gcc g++ libsdl2-dev
