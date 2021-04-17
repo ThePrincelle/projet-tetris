@@ -28,6 +28,7 @@ class Game {
     unordered_map<string, Sprite> m_Sprites;
     bool b_Quit;
     bool b_End;
+    int m_count;
 
 public:
 

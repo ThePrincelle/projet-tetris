@@ -61,25 +61,20 @@ void Board::AssignBlocks(vBlock blocks, int w, int h)
 
 }
 
-bool Board::IsContact(Vec2 pos)
+bool Board::IsContact(Vec2 pos, bool isInBoard)
 {
-    int x = pos.x - 1;
+    int x = pos.x;
     int y = pos.y;
 
     if(y == 0)
         return true;
 
-    // Reached the top ! Game Over...
-    for (int i = 1; i < m_RollerCoaster.size()-1; ++i) {
-        if (m_RollerCoaster[i] >= 19)
+    if (m_RollerCoaster[x] >= 19 && isInBoard )
             return true;
-    }
 
-    int index = (int)(((y-1)*10) + x);
+    int index = (int)(((y-1)*10) + (x-1));
     if(m_Blocks[index] != nullptr)
         return true;
-    else
-        return false;
 }
 
 bool Board::IsContactLeft(Vec2 pos)

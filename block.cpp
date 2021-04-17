@@ -24,7 +24,7 @@ Vec2 Block::GetPositionInBoard(int w,int h)
     if((w/2.0 - 21.0 * 5.0) > m_Pos.x)
        x = 0;
     else if((w/2.0 + 21.0 * 5.0) < m_Pos.x)
-       x = 10;
+       x = 9;
     else if(w/2.0 > m_Pos.x)
         x = floor((m_Pos.x-(w/2.0 - 21.0 * 5.0))/21);
     else
@@ -32,7 +32,7 @@ Vec2 Block::GetPositionInBoard(int w,int h)
 
     if((h - 2*21) < m_Pos.y)
         y = 0;
-    else if((h - 20*21) > m_Pos.y)
+    else if((h - 23*21) > m_Pos.y)
         y = 19;
     else
         y = 20 - floor(((m_Pos.y-(h - 23*21))/21));
@@ -48,7 +48,7 @@ Vec2 Block::GetVelocity() const
 bool Block::IsInBoard(int w,int h)
 {
     if((w/2.0 - 21.0 * 5.0) < m_Pos.x && (w/2.0 + 21.0 * 6.0) > m_Pos.x)
-        if((h - 2*21) > m_Pos.y &&  (h - 23*21) < m_Pos.y)
+        if((h - 2*21) > m_Pos.y &&  (h - 22*21) < m_Pos.y)
             return true;
 
     return false;

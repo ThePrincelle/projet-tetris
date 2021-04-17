@@ -130,7 +130,7 @@ bool Form::Fall(double dt, Board* board, int w, int h, bool isCurrentForm) {
     for(int i = 0; i<16; i++)
         if(m_Blocks[i] != nullptr) {
             Vec2 posInBoard = m_Blocks[i]->GetPositionInBoard(w, h);
-            if (board->IsContact(posInBoard)) {
+            if (board->IsContact(posInBoard, m_Blocks[i]->IsInBoard(w,h) )) {
                 currentUsable = false;
                 if (isCurrentForm)
                     return false;

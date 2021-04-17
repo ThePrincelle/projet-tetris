@@ -4,6 +4,7 @@
 
 void Game::Init()
 {
+    m_count = 1;
     m_Board = Board::GetInstanceBoard(m_Id);
     m_Window =
             SDL_CreateWindow("Tetris", SDL_WINDOWPOS_UNDEFINED,
@@ -115,7 +116,13 @@ void Game::Draw(double dt)
     // --- Draw playGround --- End
 
     //Current Piece Action
-    b_End = m_CurrentPiece->Fall(dt, m_Board, w, h);
+    if(m_count == 8) {
+        b_End = m_CurrentPiece->Fall(dt, m_Board, w, h);
+    }
+    else
+    {
+        b_End = m_CurrentPiece->Fall(dt, m_Board, w, h);
+    }
 
 
     if (m_CurrentPiece->IsStatic()) {
@@ -126,6 +133,7 @@ void Game::Draw(double dt)
             m_PieceFactory->ReloadPosition(m_CurrentPiece);
             m_PieceFactory->ReloadVelocity(m_CurrentPiece, m_Force);
             m_CurrentPiece->SetStatic(false);
+            m_count++;
         }
     }
 
