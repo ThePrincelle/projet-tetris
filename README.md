@@ -2,12 +2,12 @@
 
 [![Build Status](https://drone.princelle.org/api/badges/princelle/projet-tetris/status.svg)](https://drone.princelle.org/princelle/projet-tetris)
 
-Membres du binôme : 
+__Membres du binôme :__
 - [Hugo Brua](mailto:hbrua@etu.unistra.fr)
 - [Maxime Princelle](https://contact.princelle.org)
 
-Sommaire :
-
+<br/>
+__Sommaire :__
 [[_TOC_]]
 
 ---
