@@ -27,6 +27,7 @@ class Game {
     int m_Id;
     unordered_map<string, Sprite> m_Sprites;
     bool b_Quit;
+    bool b_End;
 
 public:
 
@@ -37,6 +38,7 @@ public:
                 m_Sheet(nullptr),
                 keys(nullptr),
                 b_Quit(false),
+                b_End(false),
                 m_Board(nullptr),
                 m_PieceFactory(nullptr),
                 m_CurrentPiece(nullptr),

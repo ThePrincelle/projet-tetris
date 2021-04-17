@@ -115,7 +115,7 @@ void Game::Draw(double dt)
     // --- Draw playGround --- End
 
     //Current Piece Action
-    m_CurrentPiece->Fall(dt, m_Board, w, h);
+    b_End = m_CurrentPiece->Fall(dt, m_Board, w, h);
     if(m_CurrentPiece->IsStatic())
     {
        m_Sprint = false;
@@ -132,7 +132,7 @@ void Game::Draw(double dt)
 void Game::Loop()
 {
 
-    while (!b_Quit) {
+    while (!b_Quit || !b_End) {
         Timer::GetInstance()->Tick();
 
         // TODO: Change Event Handling

@@ -42,21 +42,28 @@ Vec2 Form::GetMaxDownPosition()
     return Vec2(0,0); //Erreur
 }
 
-Vec2 Form::GetMaxUpPosition()
-{
-    return Vec2(0,0);
+Vec2 Form::GetMaxUpPosition() {
+    int row = 0;
+    do {
+        for (int i = 0; i < 16; i++)
+            if (i / 4 == row)
+                if (m_Blocks[i] != nullptr)
+                    return m_Blocks[i]->GetPosition();
+        row++;
+    } while (row < 4);
+    return Vec2(0, 0); //Erreur
 }
 
 Vec2 Form::GetMaxRightPosition()
 {
-    int modulo = 3;
+    int colomn = 3;
     do {
         for (int i = 3; i < 16; i++)
-            if (i % 4 == modulo)
+            if (i % 4 == colomn)
                 if (m_Blocks[i] != nullptr)
                     return m_Blocks[i]->GetPosition();
-        modulo--;
-    }while(modulo != -1);
+        colomn--;
+    }while(colomn >= 0);
     return Vec2(0,0); //Erreur
 }
 
@@ -121,19 +128,16 @@ bool Form::Fall(double dt, Board* board, int w, int h, bool isCurrentForm) {
     m_Pos += temp_vec;
     bool currentUsable = true;
     for(int i = 0; i<16; i++)
-        if(m_Blocks[i] != nullptr)
-            if(m_Blocks[i]->IsInBoard(w,h))
-            {
-                Vec2 posInBoard = m_Blocks[i]->GetPositionInBoard(w,h);
-                if (board->IsContact(posInBoard))
-                {
-                    currentUsable = false;
-                    if(isCurrentForm)
-                        return false;
-                    else
-                        m_Usable = false;
-                }
+        if(m_Blocks[i] != nullptr) {
+            Vec2 posInBoard = m_Blocks[i]->GetPositionInBoard(w, h);
+            if (board->IsContact(posInBoard)) {
+                currentUsable = false;
+                if (isCurrentForm)
+                    return false;
+                else
+                    m_Usable = false;
             }
+        }
 
     if(currentUsable && !m_Usable)
         m_Usable = true;

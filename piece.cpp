@@ -96,7 +96,7 @@ void Piece::MultiplyForce(Vec2 force) {
         temp_form->MultiplyForce(force);
 }
 
-void Piece::Fall(double dt, Board* board, int w, int h)
+bool Piece::Fall(double dt, Board* board, int w, int h)
 {
     bool resFall = true;
     if(!m_Static)
@@ -110,21 +110,21 @@ void Piece::Fall(double dt, Board* board, int w, int h)
             }
         }
 
-    if(GetMaxUpPosition().y < 1) {
-        if(!m_Static){
-
-        }
-        //End game
-    }
-
     // Collisions
     if (!resFall)
         if(!m_Static)
         {
-            Form*  toto = GetCurrentForm();
             board->AssignBlocks(GetBlocks(), w, h);
             Lock();
+
+                if (GetMaxUpPosition().y < (h - 20 * 21 - 3 * 21))
+                {
+                    //End game
+                    return true;
+                }
         }
+
+    return false;
 
 }
 
