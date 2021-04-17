@@ -73,6 +73,37 @@ https://drone.princelle.org/princelle/projet-tetris
 Pour plus de détails, je vous invite à consulter notre tableau Trello : https://trello.com/b/3N7GDpCV
 
 
+## Organisation du code
+
+Nous allons ici préciser ce que fait/contient chaque fichier dans l'arborescence :
+
+- [block](./block.cpp) : Entité des Blocs, s'occupe des réactations physiques des carrés qui composent les formes. 
+
+- [board](./board.cpp) : Grille du jeu Tetris, elle gère les collisions et les relations entre blocs.
+
+- [form](./form.cpp) : Définit toutes les représentations possibles des pièces (ex: orientation).
+
+- [game](./game.cpp) : Constructeur de la partie (gère le déroulement de la partie, de la création des pièces jusqu'au décompte du temps).
+
+- [main](./main.cpp) : Programme d'entrée pricipal.
+
+- [menu](./menu.cpp) : Gère le menu principal.
+
+- [piece](./piece.cpp) : Définit les caractéristiques d'une pièce (couleur, forme, etc...)
+
+- [pieceBag](./pieceBag.cpp) : Gère les pièces suivantes dans le déroulement d'une partie.
+
+- [sprite](./sprite.cpp) : Gère l'extraction des surfaces d'un fichier BMP à travers 'surface' pour une réutilisation ultérieure
+
+- [surface](./surface.cpp) : Charge les fichiers BMP
+
+- [timer](./timer.cpp) : Permet de générer des "Ticks" sans déranger le bon déroulement du code principal.
+
+- [vec2](./vec2.cpp) : Objet définissant un vecteur à deux dimensions (création, opérations, etc...).
+
+- [window_surface](./window_surface.cpp) : Permet de prendre une texture de type 'sprite' pour la déposer sur une fenêtre.
+
+
 ## Difficultés rencontrées
 
 - Problème 1
