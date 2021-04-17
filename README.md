@@ -3,6 +3,8 @@
 
 [![Build Status](https://drone.princelle.org/api/badges/princelle/projet-tetris/status.svg)](https://drone.princelle.org/princelle/projet-tetris)
 
+<br/>
+
 **Membres du binôme :**
 - [Hugo Brua](mailto:hbrua@etu.unistra.fr)
 - [Maxime Princelle](https://contact.princelle.org)
@@ -12,6 +14,8 @@
 **Sommaire :**
 
 [[_TOC_]]
+
+<br/>
 
 ---
 
