@@ -79,7 +79,7 @@ Nous allons ici préciser ce que fait/contient chaque fichier dans l'arborescenc
 
 - [block](./block.cpp) : Entité des Blocs, s'occupe des réactations physiques des carrés qui composent les formes. 
 
-- [board](./board.cpp) : Grille (10x20) du jeu Tetris, elle gère les collisions et les relations entre blocs.
+- [board](./board.cpp) : Grille du jeu Tetris, elle gère les collisions et les relations entre blocs.
 
 - [form](./form.cpp) : Définit toutes les représentations possibles des pièces (ex: orientation).
 
