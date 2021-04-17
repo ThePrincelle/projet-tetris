@@ -29,11 +29,11 @@ public:
 
     // Actions
     void Init();
-    void Loop();
+    int Loop();
 
 private:
     void Draw(double dt);
-    void Input();
+    int Input();
 };
 
 

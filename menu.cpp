@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include "menu.h"
+#include "game.h"
 
 void Menu::Init()
 {
@@ -23,7 +24,7 @@ void Menu::Init()
     b_Quit = false;
 }
 
-void Menu::Input()
+int Menu::Input()
 {
     keys = SDL_GetKeyboardState(nullptr);
     //Vec2 increaseVel = Vec2(1,m_Force);
@@ -33,8 +34,7 @@ void Menu::Input()
 
     // Quit Game
     if ((b_Quit |= (keys[SDL_SCANCODE_ESCAPE] != 0)))
-        return;
-
+        return 0;
 }
 
 void Menu::Draw(double dt)
@@ -69,9 +69,8 @@ void Menu::Draw(double dt)
 
 }
 
-void Menu::Loop()
+int Menu::Loop()
 {
-
     while (!b_Quit) {
         Timer::GetInstance()->Tick();
 
@@ -85,6 +84,26 @@ void Menu::Loop()
             case SDL_QUIT:
                 b_Quit = true;
                 break;
+            case SDL_MOUSEBUTTONDOWN:
+                if (event.button.button == SDL_BUTTON_LEFT) {
+                    if (event.button.y >= 230 && event.button.y <= 280) {
+                        if (event.button.x >= 200 && event.button.x <= 320) {
+                            // Solo
+                            SDL_Quit();
+                            return 1;
+                        } else if (event.button.x >= 500 && event.button.y <= 560) {
+                            // IA
+                            SDL_Quit();
+                            return 2;
+                        } else {
+                            break;
+                        }
+                    } else {
+                        break;
+                    }
+                } else {
+                    break;
+                }
             default:
                 break;
         }

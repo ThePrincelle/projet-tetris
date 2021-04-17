@@ -8,15 +8,20 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    Game g = Game(1);
+    Menu m;
 
-	g.Init();
-	g.Loop();
+    m.Init();
+    int next_step = m.Loop();
 
-	//Menu m;
-
-    //m.Init();
-    //m.Loop();
-
-    SDL_Quit();
+    if (next_step == 1) {
+        Game g = Game(1);
+        g.Init();
+        g.Loop();
+    } else if (next_step == 2) {
+        Game g = Game(2);
+        g.Init();
+        g.Loop();
+    } else {
+        SDL_Quit();
+    }
 }
