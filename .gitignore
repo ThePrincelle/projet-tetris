@@ -147,3 +147,5 @@ $RECYCLE.BIN/
 cmake-build-debug
 
 TP_CPP_SDL
+
+/.idea
