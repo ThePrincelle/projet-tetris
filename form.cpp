@@ -2,13 +2,13 @@
 #include "form.h"
 
 // Constructors
-Form::Form() : m_Pos(0, 0), m_Vel(0, 0)
+Form::Form() : m_Pos(0, 0), m_Vel(0, 0), m_Usable(false)
 {
 
 }
 
 Form::Form(double x, double y, double vx, double vy, vBlock &blocks)
-        : m_Pos(x, y), m_Vel(vx, vy)
+        : m_Pos(x, y), m_Vel(vx, vy), m_Usable(true)
 {
     m_Blocks = blocks;
     for(int i = 0; i<16; i++)
@@ -74,6 +74,11 @@ Vec2 Form::GetVelocity() const
     return m_Vel;
 }
 
+bool Form::IsUsable()
+{
+    return m_Usable;
+}
+
 // Setters
 void Form::SetPosition(Vec2 &pos) {
     m_Pos = pos;
@@ -111,19 +116,27 @@ void Form::MultiplyForce(Vec2 &force) {
             m_Blocks[i]->MultiplyForce(force);
 }
 
-bool Form::Fall(double dt, Board* board, int w, int h) {
+bool Form::Fall(double dt, Board* board, int w, int h, bool isCurrentForm) {
     Vec2 temp_vec = Vec2(0,m_Vel.y * dt);
     m_Pos += temp_vec;
+    bool currentUsable = true;
     for(int i = 0; i<16; i++)
         if(m_Blocks[i] != nullptr)
             if(m_Blocks[i]->IsInBoard(w,h))
             {
                 Vec2 posInBoard = m_Blocks[i]->GetPositionInBoard(w,h);
-                if (board->IsContact(posInBoard,m_Blocks[i]))
+                if (board->IsContact(posInBoard,m_Blocks[i], m_Blocks))
                 {
-                    return false;
+                    currentUsable = false;
+                    if(isCurrentForm)
+                        return false;
+                    else
+                        m_Usable = false;
                 }
             }
+
+    if(currentUsable && !m_Usable)
+        m_Usable = true;
 
     for(int i = 0; i<16; i++)
         if(m_Blocks[i] != nullptr)

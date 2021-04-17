@@ -58,15 +58,12 @@ void Board::AssignBlocks(vBlock blocks, int w, int h)
 
 }
 
-bool Board::IsContact(Vec2 pos, Block* block)
+bool Board::IsContact(Vec2 pos, Block* block, vBlock blocks)
 {
     int x = (int)pos.x;
     int y = (int)pos.y;
 
-    if(m_RollerCoaster[x] + 1 >= y)
-        return true;
-    else
-        return false;
+    return m_RollerCoaster[x] + 1 >= y;
 }
 
 bool Board::IsContactLeft(Vec2 pos, Block* block)
@@ -74,10 +71,7 @@ bool Board::IsContactLeft(Vec2 pos, Block* block)
     int x = (int)pos.x;
     int y = (int)pos.y;
 
-    if(m_RollerCoaster[x] >= y)
-        return true;
-    else
-        return false;
+    return m_RollerCoaster[x] >= y;
 }
 
 bool Board::IsContactRight(Vec2 pos, Block* block)
@@ -85,9 +79,6 @@ bool Board::IsContactRight(Vec2 pos, Block* block)
     int x = (int)pos.x;
     int y = (int)pos.y;
 
-    if(m_RollerCoaster[x+1] >= y)
-        return true;
-    else
-        return false;
+    return m_RollerCoaster[x+1] >= y;
 }
 

@@ -37,11 +37,6 @@ Vec2 Block::GetPositionInBoard(int w,int h)
     else
         y = 20 - floor(((m_Pos.y-(h - 23*21))/21));
 
-    if(x == 0)
-    {
-        return Vec2(x,y);
-    }
-
     return Vec2(x,y);
 }
 

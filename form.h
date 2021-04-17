@@ -25,6 +25,7 @@ class Form {
         vBlock m_Blocks;
         Vec2 m_Pos;
         Vec2 m_Vel;
+        bool m_Usable;
 
     public:
         Form();
@@ -38,6 +39,7 @@ class Form {
         Vec2 GetMaxLeftPosition();
         Vec2 GetVelocity() const;
         vBlock GetBlocks() const;
+        bool IsUsable();
 
         // Setters
         void SetPosition(Vec2 &pos);
@@ -46,7 +48,7 @@ class Form {
         // Actions
         void AddForce(Vec2 &force);
         void MultiplyForce(Vec2 &force);
-        bool Fall(double dt, Board* board, int w, int h);
+        bool Fall(double dt, Board* board, int w, int h, bool isCurrentForm);
         void Move(Vec2 & vel);
         bool MoveRight(Vec2 & velR, Board* board, int w, int h);
         bool MoveLeft(Vec2 & velL, Board* board, int w, int h);

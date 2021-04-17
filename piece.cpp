@@ -99,17 +99,16 @@ void Piece::MultiplyForce(Vec2 force) {
 void Piece::Fall(double dt, Board* board, int w, int h)
 {
     bool resFall = true;
-
     if(!m_Static)
-        for(Form* temp_form : m_Forms)
-            if(temp_form != nullptr)
-            {
-                resFall = temp_form->Fall(dt, board,w,h);
-                if(!resFall)
-                {
+        for(int i = 0; i < m_Forms.size(); i++) {
+            Form *temp_form = m_Forms[i];
+            if (temp_form != nullptr) {
+                resFall = temp_form->Fall(dt, board, w, h, i ==  m_IdCombination);
+                if (!resFall) {
                     break;
                 }
             }
+        }
 
     if(GetMaxUpPosition().y < 1) {
         if(!m_Static){
@@ -164,20 +163,26 @@ void  Piece::MoveLeft(Board* board)
 void Piece::RotateRight()
 {
     if(!m_Static) {
-        if ((m_IdCombination + 1) >= m_Forms.size())
-            m_IdCombination = 0;
+        if ((m_IdCombination + 1) >= m_Forms.size()) {
+            if (m_Forms[0]->IsUsable())
+                m_IdCombination = 0;
+        }
         else
-            m_IdCombination++;
+            if(m_Forms[m_IdCombination+1]->IsUsable())
+                m_IdCombination++;
     }
 }
 
 void Piece::RotateLeft()
 {
     if(!m_Static) {
-        if ((m_IdCombination - 1) < 0)
-            m_IdCombination = (int) m_Forms.size() - 1;
+        if ((m_IdCombination - 1) < 0) {
+            if (m_Forms[(int) m_Forms.size() - 1]->IsUsable())
+                m_IdCombination = (int) m_Forms.size() - 1;
+        }
         else
-            m_IdCombination--;
+            if(m_Forms[m_IdCombination-1]->IsUsable())
+                m_IdCombination--;
     }
 }
 
