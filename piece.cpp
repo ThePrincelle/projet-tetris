@@ -117,11 +117,11 @@ bool Piece::Fall(double dt, Board* board, int w, int h)
             board->AssignBlocks(GetBlocks(), w, h);
             Lock();
 
-                if (GetMaxUpPosition().y < (h - 20 * 21 - 3 * 21))
-                {
-                    //End game
-                    return true;
-                }
+            if (GetMaxUpPosition().y < (h - 20 * 21 - 3 * 21))
+            {
+                //End game
+                return true;
+            }
         }
 
     return false;

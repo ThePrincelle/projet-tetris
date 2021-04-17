@@ -164,8 +164,9 @@ bool Form::MoveRight(Vec2 & vel, Board* board, int w, int h)
     for(int i = 0; i<16; i++)
         if(m_Blocks[i] != nullptr)
         {
-            if(board->IsContactRight(m_Blocks[i]->GetPositionInBoard(w,h)))
-                return false;
+            if(m_Blocks[i]->IsInBoard(w,h))
+                if(board->IsContactRight(m_Blocks[i]->GetPositionInBoard(w,h)))
+                    return false;
         }
     this->Move(vel);
     return true;
@@ -176,8 +177,9 @@ bool Form::MoveLeft(Vec2 & vel, Board* board, int w, int h)
     for(int i = 0; i<16; i++)
         if(m_Blocks[i] != nullptr)
         {
-            if(board->IsContactLeft(m_Blocks[i]->GetPositionInBoard(w,h)))
-                return false;
+            if(m_Blocks[i]->IsInBoard(w,h))
+                if(board->IsContactLeft(m_Blocks[i]->GetPositionInBoard(w,h)))
+                    return false;
         }
     this->Move(vel);
     return true;

@@ -20,9 +20,10 @@ bool Board::SearchIsRowFull(int x)
     {
         const int e;
         explicit Exist(int n) : e(n) {}
-        bool operator()(int n) const { return n < e; }
+        bool operator()(int n) const { return n > e; }
     };
-    return none_of(m_RollerCoaster.cbegin(),m_RollerCoaster.cend(), Exist(x));
+    if(!none_of(m_RollerCoaster.cbegin(),m_RollerCoaster.cend(), Exist(x)))
+        return false;
 }
 
 Board* Board::GetInstanceBoard(int IdGame)
@@ -53,17 +54,25 @@ void Board::AssignBlocks(vBlock blocks, int w, int h)
             int y = (int)posInBoard.y;
 
             m_RollerCoaster[x] = y>m_RollerCoaster[x]?y:m_RollerCoaster[x];
-            m_Blocks[x * y] = block;
+            x--;
+            m_Blocks[y*10 + x] = block;
         }
 
 }
 
 bool Board::IsContact(Vec2 pos)
 {
-    int x = (int)pos.x;
+    int x = (int)pos.x -1;
     int y = (int)pos.y;
 
-    return m_RollerCoaster[x] + 1 >= y;
+    if(y == 0)
+        return true;
+
+    int index = (y-1)*10 + x;
+    if(m_Blocks[index] != nullptr)
+        return true;
+    else
+        return false;
 }
 
 bool Board::IsContactLeft(Vec2 pos)
@@ -71,7 +80,7 @@ bool Board::IsContactLeft(Vec2 pos)
     int x = (int)pos.x;
     int y = (int)pos.y;
 
-    return m_RollerCoaster[x-1] >= y;
+    return m_Blocks[y*10 + x -2] != nullptr;
 }
 
 bool Board::IsContactRight(Vec2 pos)
@@ -79,6 +88,6 @@ bool Board::IsContactRight(Vec2 pos)
     int x = (int)pos.x;
     int y = (int)pos.y;
 
-    return m_RollerCoaster[x+1] >= y;
+    return m_Blocks[y*10 + x] != nullptr;
 }
 
