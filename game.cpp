@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include "game.h"
+//#include "SDL_ttf.h"
 
 void Game::Init()
 {
@@ -23,6 +24,19 @@ void Game::Init()
             {"BlockGray", Sprite(m_Sheet, {161, 3, 21, 21})},
     };
     m_WinSurf = new WindowSurface(m_Window, m_Sprites["background"]);
+
+    // TTF Library experiment
+
+    // Check if TTF lib is here
+    //if (TTF_Init() < 0)
+    //    std::cout << "Error: " << TTF_GetError() << std::endl;
+
+    //TTF_Font *font = TTF_OpenFont("./pt_mono.ttf", 20);
+    //SDL_Color text_color = {0,0,0,255};
+    //SDL_Surface *textSurface = TTF_RenderText_Solid(font, "Score", text_color);
+    //Vec2 score_position = Vec2(10, 10);
+    //m_WinSurf->Paint(textSurface, score_position);
+    // Missing renderer...
 
     b_Quit = false;
 
