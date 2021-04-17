@@ -7,7 +7,7 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    Game g;
+    Game g = Game(1);
 
     g.Init();
     g.Loop();

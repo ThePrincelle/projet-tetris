@@ -3,6 +3,7 @@
 #include "vec2.h"
 #include "sprite.h"
 #include "window_surface.h"
+#include "board.h"
 #include <cmath>
 #include <vector>
 
@@ -45,8 +46,10 @@ class Form {
         // Actions
         void AddForce(Vec2 &force);
         void MultiplyForce(Vec2 &force);
-        void Fall(double dt);
-        void Move(Vec2 & velR);
+        bool Fall(double dt, Board* board, int w, int h);
+        void Move(Vec2 & vel);
+        bool MoveRight(Vec2 & velR, Board* board, int w, int h);
+        bool MoveLeft(Vec2 & velL, Board* board, int w, int h);
         void Sprint();
         void StopSprint();
         void SelfPaint(WindowSurface* winSurf, Sprite color);

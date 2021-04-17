@@ -4,6 +4,7 @@
 
 void Game::Init()
 {
+    m_Board = Board::GetInstanceBoard(m_Id);
     m_Window =
             SDL_CreateWindow("Tetris", SDL_WINDOWPOS_UNDEFINED,
                              SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN);
@@ -76,14 +77,13 @@ void Game::Input()
     }*/
     else if (keys[SDL_SCANCODE_RIGHT])
     {
-        float max = m_CurrentPiece->GetMaxRightPosition().x;
         if(((w/2.0 + 21.0 * 6.0)-1.2) > (int)round(m_CurrentPiece->GetMaxRightPosition().x + 21))
-            m_CurrentPiece->MoveRight();
+            m_CurrentPiece->MoveRight(m_Board);
     }
     else if (keys[SDL_SCANCODE_LEFT])
     {
         if(((w/2.0 - 21.0 * 4.0)-1.2) < (int)round(m_CurrentPiece->GetMaxLeftPosition().x - 21))
-            m_CurrentPiece->MoveLeft();
+            m_CurrentPiece->MoveLeft(m_Board);
 
     }
     else
@@ -115,7 +115,7 @@ void Game::Draw(double dt)
     // --- Draw playGround --- End
 
     //Current Piece Action
-    m_CurrentPiece->Fall(dt, h);
+    m_CurrentPiece->Fall(dt, m_Board, w, h);
     if(m_CurrentPiece->IsStatic())
     {
        m_Sprint = false;
