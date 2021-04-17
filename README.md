@@ -67,4 +67,14 @@ Pour plus de détails, je vous invite à consulter notre tableau Trello : https:
 
 ## Difficultés rencontrées
 
-xxx
+- Problème 1
+> Solution 1
+
+- Problème 2
+> Solution 2
+
+- Problème 3
+> Solution 3
+
+- Problème 4
+> Solution 4
