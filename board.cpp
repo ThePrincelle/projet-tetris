@@ -11,19 +11,20 @@ Board::Board()
     m_RollerCoaster[0] = 19;
 }
 
-bool Board::SearchIsRowFull(int x)
+bool Board::SearchIsRowFull(int y)
 {
-    if(x<0 || x >= m_RollerCoaster.size())
+    if(y<0 || y >= 20)
         return false;
 
-    struct Exist
-    {
-        const int e;
-        explicit Exist(int n) : e(n) {}
-        bool operator()(int n) const { return n > e; }
-    };
-    if(!none_of(m_RollerCoaster.cbegin(),m_RollerCoaster.cend(), Exist(x)))
-        return false;
+    for( int i = 1; i < 11; i++)
+        if(m_RollerCoaster[i]<y)
+            return false;
+
+    for(int i = 0; i < m_Blocks.size(); i++)
+        if(i/10 == y && m_Blocks[i] == nullptr)
+            return false;
+
+    return true;
 }
 
 Board* Board::GetInstanceBoard(int IdGame)
@@ -96,4 +97,34 @@ bool Board::IsContactRight(Vec2 pos)
 
     return m_Blocks[y*10 + x] != nullptr;
 }
+
+bool Board::DestroyRowIfFull(int y)
+{
+    if(!SearchIsRowFull(y))
+        return false;
+
+    for(int i = 0; i < m_Blocks.size(); i++)
+        if(i/10 == y && m_Blocks[i] != nullptr)
+        {
+            m_Blocks[i]->Erased();
+        }
+        else if (m_Blocks[i] != nullptr && i/10 >y)
+        {
+            Vec2 moveDown = Vec2(0,21);
+            m_Blocks[i]->Move(moveDown);
+        }
+
+    for(int i = 0; i < 10; i++)
+    {
+        m_Blocks.erase(m_Blocks.begin() + (y * 10));
+        m_Blocks.push_back(nullptr);
+    }
+
+    for( int i = 1; i < 11; i++)
+        m_RollerCoaster[i]--;
+
+
+    return true;
+}
+
 

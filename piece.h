@@ -34,6 +34,7 @@ class Piece  {
         Vec2 GetMaxLeftPosition();
         vBlock GetBlocks();
         Form* GetCurrentForm();
+        void GetBlocksRows(vint &rows, int w, int h);
         bool IsStatic();
 
         // Setters

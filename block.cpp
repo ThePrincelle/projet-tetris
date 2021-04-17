@@ -1,12 +1,12 @@
 #include "block.h"
 
 // Constructors
-Block::Block() : m_Pos(0, 0), m_Vel(0, 0)
+Block::Block() : m_Pos(0, 0), m_Vel(0, 0), m_Erased(false)
 {
 
 }
 Block::Block(double x, double y, double vx, double vy)
-        : m_Pos(x, y), m_Vel(vx, vy)
+        : m_Pos(x, y), m_Vel(vx, vy), m_Erased(false)
 {
 
 }
@@ -58,8 +58,13 @@ bool Block::IsInBoard(int w,int h)
 void Block::SetPosition(Vec2 &pos) {
     m_Pos = pos;
 }
+
 void Block::SetVelocity(Vec2 &vel) {
     m_Vel = vel;
+}
+
+void Block::Erased() {
+    m_Erased = true;
 }
 
 // Actions
@@ -95,7 +100,8 @@ void Block::StopSprint()
 
 void Block::SelfPaint(WindowSurface* winSurf, Sprite color)
 {
-    winSurf->Paint(color,m_Pos);
+    if(!m_Erased)
+        winSurf->Paint(color,m_Pos);
 }
 
 void Block::Lock()

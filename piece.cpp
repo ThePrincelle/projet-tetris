@@ -23,6 +23,17 @@ vBlock Piece::GetBlocks()
     return GetCurrentForm()->GetBlocks();
 }
 
+void Piece::GetBlocksRows(vint &rows, int w, int h)
+{
+    for (Block* block : GetBlocks())
+        if(block != nullptr)
+        {
+            int y = block->GetPositionInBoard(w,h).y;
+            if(!(std::find(rows.begin(), rows.end(), y) != rows.end()))
+                rows.push_back(y);
+        }
+}
+
 vForm Piece::GetCombinations() const
 {
     return m_Forms;
@@ -122,6 +133,12 @@ bool Piece::Fall(double dt, Board* board, int w, int h)
                 //End game
                 return true;
             }
+
+            vint rows;
+            GetBlocksRows(rows,w,h);
+            for (int posy : rows )
+                board->DestroyRowIfFull(posy);
+            rows.clear();
         }
 
     return false;
