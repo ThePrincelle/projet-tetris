@@ -6,8 +6,11 @@ Membres du binôme :
 - [Hugo Brua](mailto:hbrua@etu.unistra.fr)
 - [Maxime Princelle](https://contact.princelle.org)
 
+Sommaire :
 
-[TOC]
+[[_TOC_]]
+
+---
 
 ## Compiler & Lancer
 
