@@ -15,6 +15,7 @@
 
 ---
 
+
 ## Compiler & Lancer
 
 Pour pouvoir compiler et lancer ce projet, certains applicatifs doivent être installés sur votre machine.
@@ -38,6 +39,7 @@ make
 ./TP_CPP_SDL
 ```
 
+
 ## Tests automatisés
 
 A chaque commit est exécuté un test afin de vérifier si le code est fonctionnel ou non. 
@@ -45,6 +47,7 @@ A chaque commit est exécuté un test afin de vérifier si le code est fonctionn
 Ce test est effectué dans l'environnement précisé dans le fichier [Dockerfile](./Dockerfile) est les résultats de ces derniers sont disponibles à cette adresse : 
 
 https://drone.princelle.org/princelle/projet-tetris
+
 
 ## Répartition du travail
 
@@ -65,6 +68,7 @@ https://drone.princelle.org/princelle/projet-tetris
 
 Pour plus de détails, je vous invite à consulter notre tableau Trello : https://trello.com/b/3N7GDpCV
 
+
 ## Difficultés rencontrées
 
 - Problème 1
@@ -78,3 +82,10 @@ Pour plus de détails, je vous invite à consulter notre tableau Trello : https:
 
 - Problème 4
 > Solution 4
+
+
+## Fonctionnalités futures
+
+- Mode 1V1
+- Jouer contre l'ordinateur (IA)
+- xxx
