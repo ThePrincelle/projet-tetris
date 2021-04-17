@@ -44,6 +44,7 @@ void WindowSurface::DrawBackground()
 
 }
 
+// Paints a Sprint at a specific position
 void WindowSurface::Paint(Sprite &sprite, Vec2& position)
 {
     SDL_Rect dst = {int(position.x), int(position.y), 0, 0};
@@ -51,6 +52,7 @@ void WindowSurface::Paint(Sprite &sprite, Vec2& position)
                     GetSDLSurface(), &dst);
 }
 
+// Paints a Sprit at a specific position with a specific size
 void WindowSurface::Paint(Sprite &sprite, Vec2& position, float w, float h)
 {
     SDL_Rect dst = {int(position.x), int(position.y), 0, 0};

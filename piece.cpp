@@ -107,6 +107,7 @@ void Piece::MultiplyForce(Vec2 force) {
         temp_form->MultiplyForce(force);
 }
 
+// Sets the piece to fall and handles colisions
 bool Piece::Fall(double dt, Board* board, int w, int h)
 {
     bool resFall = true;
@@ -237,6 +238,7 @@ void Piece::Lock()
 
 PieceFactory* PieceFactory::m_PieceFactory = nullptr;
 
+// Create the pieces
 Piece* PieceFactory::CreatePiece(TetrisPiece typePiece, double x, double y, double vx, double vy)
 {
         vForm forms = vForm();

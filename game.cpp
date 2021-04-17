@@ -2,6 +2,7 @@
 #include <iostream>
 #include "game.h"
 
+// Inits the UI of the game
 void Game::Init()
 {
     m_Board = Board::GetInstanceBoard(m_Id);
@@ -42,6 +43,7 @@ void Game::Init()
     m_CurrentPiece->SetStatic(false);
 }
 
+// Handles inputs from the User
 void Game::Input()
 {
     keys = SDL_GetKeyboardState(nullptr);
@@ -96,6 +98,7 @@ void Game::Input()
     }
 }
 
+// Draws the UI
 void Game::Draw(double dt)
 {
     //Init Window size
@@ -129,6 +132,7 @@ void Game::Draw(double dt)
     m_PieceFactory->DrawAllPiece(m_WinSurf);
 }
 
+// Main Loop for Game
 void Game::Loop()
 {
     while (!b_Quit || !b_End) {
@@ -156,6 +160,7 @@ void Game::Loop()
     }
 }
 
+// Destroy Game
 Game::~Game()
 {
     delete m_WinSurf;
