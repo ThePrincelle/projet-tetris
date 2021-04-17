@@ -17,6 +17,7 @@ Vec2 Block::GetPosition() const
     return m_Pos;
 }
 
+// Get the position in a board
 Vec2 Block::GetPositionInBoard(int w,int h)
 {
     float x,y;
@@ -45,6 +46,7 @@ Vec2 Block::GetVelocity() const
     return m_Vel;
 }
 
+// Check if value is in board.
 bool Block::IsInBoard(int w,int h)
 {
     if((w/2.0 - 21.0 * 5.0) < m_Pos.x && (w/2.0 + 21.0 * 6.0) > m_Pos.x)
@@ -76,6 +78,7 @@ void Block::MultiplyForce(Vec2 force) {
     m_Vel *= force;
 }
 
+// Fall function to set the block to fall
 void Block::Fall(double dt) {
 
     Vec2 temp_vec = m_Vel * dt;
@@ -98,12 +101,14 @@ void Block::StopSprint()
     MultiplyForce(stopSprint);
 }
 
+// Displays the Block
 void Block::SelfPaint(WindowSurface* winSurf, Sprite color)
 {
     if(!m_Erased)
         winSurf->Paint(color,m_Pos);
 }
 
+// Locks the block in place
 void Block::Lock()
 {
     Vec2 lock = Vec2(0, 0);

@@ -1,5 +1,6 @@
 #include "pieceBag.h"
 
+// Constructors
 PieceBag::PieceBag() {}
 
 PieceBag::PieceBag(PieceFactory* pieceFactory, SDL_Window *window) : m_PieceFactory(pieceFactory), m_Window(window)
@@ -19,6 +20,7 @@ PieceBag::PieceBag(PieceFactory* pieceFactory, SDL_Window *window) : m_PieceFact
     }
 }
 
+// Getters
 Piece* PieceBag::GetNextPiece()
 {
     int w, h;
@@ -42,6 +44,7 @@ Piece* PieceBag::GetNextPiece()
     return res;
 }
 
+// Init the pile of Pieces
 void PieceBag::InitPilePiece()
 {
     int maxPiece = TetrisPiece::Count;

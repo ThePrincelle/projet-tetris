@@ -123,6 +123,7 @@ void Form::MultiplyForce(Vec2 &force) {
             m_Blocks[i]->MultiplyForce(force);
 }
 
+// Function that set the block to fall
 bool Form::Fall(double dt, Board* board, int w, int h, bool isCurrentForm) {
     Vec2 temp_vec = Vec2(0,m_Vel.y * dt);
     m_Pos += temp_vec;
@@ -149,6 +150,7 @@ bool Form::Fall(double dt, Board* board, int w, int h, bool isCurrentForm) {
     return true;
 }
 
+// The functions below move the blocks
 void Form::Move(Vec2 & vel)
 {
     m_Pos += vel;
