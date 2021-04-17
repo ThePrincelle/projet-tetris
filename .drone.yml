@@ -1,0 +1,14 @@
+kind: pipeline
+type: docker
+name: test-build-compile
+
+steps:
+  - name: build
+    image: docker.io/theprincemax/tetris-cpp-tester
+    commands:
+      - cmake .
+
+  - name: compile
+    image: docker.io/theprincemax/tetris-cpp-tester
+    commands:
+      - make
