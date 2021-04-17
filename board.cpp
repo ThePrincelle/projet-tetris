@@ -67,8 +67,15 @@ bool Board::IsContact(Vec2 pos)
 
     if(y == 0)
         return true;
+    // Reached the top ! Game Over...
+    for (int i = 1; i < m_RollerCoaster.size()-1; ++i) {
+        int val = m_RollerCoaster[i];
+        if (val >= 19) {
+            return true;
+        }
+    }
 
-    int index = (y-1)*10 + x;
+    int index = (int)(((y-1)*10) + x);
     if(m_Blocks[index] != nullptr)
         return true;
     else
