@@ -39,7 +39,7 @@ make
 
 A chaque commit est exécuté un test afin de vérifier si le code est fonctionnel ou non. 
 
-Ce test est effectué dans l'environnement précisé dans le fichier Dockerfile est les résultats de ces derniers sont disponibles à cette adresse : 
+Ce test est effectué dans l'environnement précisé dans le fichier [Dockerfile](./Dockerfile) est les résultats de ces derniers sont disponibles à cette adresse : 
 
 https://drone.princelle.org/princelle/projet-tetris
 
