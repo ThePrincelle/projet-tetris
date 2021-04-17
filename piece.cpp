@@ -128,17 +128,6 @@ void Piece::Fall(double dt, Board* board, int w, int h)
 
 }
 
-void  Piece::MoveRight(Board* board)
-{
-    Vec2 temp_vec = Vec2(21,0);
-    if(!m_Static)
-        for(Form* temp_form : m_Forms)
-            if(temp_form != nullptr)
-            {
-                temp_form->Move(temp_vec);
-            }
-}
-
 void  Piece::Move( Vec2 pos, bool forceMove = false)
 {
     if(!m_Static || forceMove)
@@ -149,14 +138,25 @@ void  Piece::Move( Vec2 pos, bool forceMove = false)
             }
 }
 
-void  Piece::MoveLeft(Board* board)
+void  Piece::MoveRight(Board* board, int w, int h)
+{
+    Vec2 temp_vec = Vec2(21,0);
+    if(!m_Static)
+        for(Form* temp_form : m_Forms)
+            if(temp_form != nullptr)
+            {
+                temp_form->MoveRight(temp_vec, board, w,h);
+            }
+}
+
+void  Piece::MoveLeft(Board* board, int w, int h)
 {
     Vec2 temp_vec = Vec2(-21,0);
     if(!m_Static)
         for(Form* temp_form : m_Forms)
             if(temp_form != nullptr)
             {
-                temp_form->Move(temp_vec);
+                temp_form->MoveLeft(temp_vec, board, w, h);
             }
 }
 

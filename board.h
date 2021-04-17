@@ -30,9 +30,9 @@ class Board {
     public:
         vBlock GetBlocks();
         void AssignBlocks(vBlock blocks, int w, int h);
-        bool IsContact(Vec2 pos, Block* block, vBlock blocks);
-        bool IsContactLeft(Vec2 pos, Block* block);
-        bool IsContactRight(Vec2 pos, Block* block);
+        bool IsContact(Vec2 pos);
+        bool IsContactLeft(Vec2 pos);
+        bool IsContactRight(Vec2 pos);
 
 };
 

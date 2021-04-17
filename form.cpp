@@ -125,7 +125,7 @@ bool Form::Fall(double dt, Board* board, int w, int h, bool isCurrentForm) {
             if(m_Blocks[i]->IsInBoard(w,h))
             {
                 Vec2 posInBoard = m_Blocks[i]->GetPositionInBoard(w,h);
-                if (board->IsContact(posInBoard,m_Blocks[i], m_Blocks))
+                if (board->IsContact(posInBoard))
                 {
                     currentUsable = false;
                     if(isCurrentForm)
@@ -160,7 +160,7 @@ bool Form::MoveRight(Vec2 & vel, Board* board, int w, int h)
     for(int i = 0; i<16; i++)
         if(m_Blocks[i] != nullptr)
         {
-            if(board->IsContactRight(m_Blocks[i]->GetPositionInBoard(w,h),m_Blocks[i]))
+            if(board->IsContactRight(m_Blocks[i]->GetPositionInBoard(w,h)))
                 return false;
         }
     this->Move(vel);
@@ -172,7 +172,7 @@ bool Form::MoveLeft(Vec2 & vel, Board* board, int w, int h)
     for(int i = 0; i<16; i++)
         if(m_Blocks[i] != nullptr)
         {
-            if(board->IsContactLeft(m_Blocks[i]->GetPositionInBoard(w,h),m_Blocks[i]))
+            if(board->IsContactLeft(m_Blocks[i]->GetPositionInBoard(w,h)))
                 return false;
         }
     this->Move(vel);

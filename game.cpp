@@ -78,12 +78,12 @@ void Game::Input()
     else if (keys[SDL_SCANCODE_RIGHT])
     {
         if(((w/2.0 + 21.0 * 6.0)-1.2) > (int)round(m_CurrentPiece->GetMaxRightPosition().x + 21))
-            m_CurrentPiece->MoveRight(m_Board);
+            m_CurrentPiece->MoveRight(m_Board,w,h);
     }
     else if (keys[SDL_SCANCODE_LEFT])
     {
         if(((w/2.0 - 21.0 * 4.0)-1.2) < (int)round(m_CurrentPiece->GetMaxLeftPosition().x - 21))
-            m_CurrentPiece->MoveLeft(m_Board);
+            m_CurrentPiece->MoveLeft(m_Board, w,h);
 
     }
     else

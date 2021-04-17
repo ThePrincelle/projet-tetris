@@ -45,8 +45,8 @@ class Piece  {
         void AddForce(Vec2 force);
         void MultiplyForce(Vec2 force);
         void Fall(double dt, Board* board, int w, int h);
-        void MoveRight(Board* board);
-        void MoveLeft(Board* board);
+        void MoveRight(Board* board, int w, int h);
+        void MoveLeft(Board* board, int w, int h);
         void Move(Vec2 pos, bool forceMove);
         void RotateRight();
         void RotateLeft();
