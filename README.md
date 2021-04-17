@@ -75,7 +75,8 @@ Pour plus de détails, je vous invite à consulter notre tableau Trello : https:
 
 ## Organisation du code
 
-Nous allons ici préciser ce que fait/contient chaque fichier dans l'arborescence :
+Nous allons ici préciser ce que fait/contient chaque fichier dans l'arborescence.
+A noter que l'organisation du code a été conçue de manière à avoir des éléments facilement éditables.
 
 - [block](./block.cpp) : Entité des Blocs, s'occupe des réactations physiques des carrés qui composent les formes. 
 
@@ -106,21 +107,21 @@ Nous allons ici préciser ce que fait/contient chaque fichier dans l'arborescenc
 
 ## Difficultés rencontrées
 
-- Problème 1
-> Solution 1
+- Implémentation de la librairie SDL_txt
+> Après de multiples tentatives, il se trouve que pour intégrer du texte, il nous faut utiliser un Renderer avec SDL. Or, ce dernier n'a pas été implémenté dès le départ.
 
-- Problème 2
-> Solution 2
+- Utilisation impossible de plusieurs surfaces
+> Au sein d'une même instance de Game, il nous est impossible de charger de multiples surfaces provenant de fichiers BMP différents. La solution à ça a été de mettre toutes les textures au sein d'un seul même fichier.
 
-- Problème 3
-> Solution 3
+- Collision des pièces
+> Le problème venait du tableau contenant les informations des cases de la grille. En effet, les calculs effectués depuis ces derniers engendraient des conflits entre les pièces indiquées dans le tableau et les vraies formes.
 
-- Problème 4
-> Solution 4
+- Gestion du sommet du bac
+> Pour contourner le problème, nous avons créé un tableau contenant la hauteur de chaque colonne sur la grille, une vérification est faite à chaque pose d'une forme, si on dépasse la grille, le jeu se ferme.
 
 
 ## Fonctionnalités futures
 
 - Mode 1V1
 - Jouer contre l'ordinateur (IA)
-- xxx
+- Ajout de textes (voir branche: text_implementation)
