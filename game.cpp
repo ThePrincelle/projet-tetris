@@ -131,7 +131,6 @@ void Game::Draw(double dt)
 
 void Game::Loop()
 {
-
     while (!b_Quit || !b_End) {
         Timer::GetInstance()->Tick();
 
