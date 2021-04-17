@@ -62,8 +62,8 @@ void Board::AssignBlocks(vBlock blocks, int w, int h)
 
 bool Board::IsContact(Vec2 pos)
 {
-    int x = (int)pos.x -1;
-    int y = (int)pos.y;
+    int x = pos.x - 1;
+    int y = pos.y;
 
     if(y == 0)
         return true;
