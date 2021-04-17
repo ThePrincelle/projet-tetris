@@ -13,9 +13,9 @@ class Block {
     private:
         Vec2 m_Pos;
         Vec2 m_Vel;
+        bool m_Erased;
 
     public:
-
         // Constructors
         Block();
         Block(double x, double y, double vx, double vy);
@@ -29,6 +29,7 @@ class Block {
         // Setters
         void SetPosition(Vec2 &pos);
         void SetVelocity(Vec2 &vel);
+        void Erased();
 
         // Actions
         void AddForce(Vec2 force);

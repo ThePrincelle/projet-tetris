@@ -26,6 +26,7 @@ class Board {
         vint m_RollerCoaster;
         Board();
         bool SearchIsRowFull(int x);
+        void MoveDownOnBoardAbove(int y);
 
     public:
         vBlock GetBlocks();
@@ -33,6 +34,7 @@ class Board {
         bool IsContact(Vec2 pos);
         bool IsContactLeft(Vec2 pos);
         bool IsContactRight(Vec2 pos);
+        bool DestroyRowIfFull(int x);
 
 };
 
