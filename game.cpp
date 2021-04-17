@@ -116,13 +116,17 @@ void Game::Draw(double dt)
 
     //Current Piece Action
     b_End = m_CurrentPiece->Fall(dt, m_Board, w, h);
-    if(m_CurrentPiece->IsStatic())
-    {
-       m_Sprint = false;
-       m_CurrentPiece =  m_pieceBag.GetNextPiece();
-       m_PieceFactory->ReloadPosition(m_CurrentPiece);
-       m_PieceFactory->ReloadVelocity(m_CurrentPiece,m_Force);
-       m_CurrentPiece->SetStatic(false);
+
+
+    if (m_CurrentPiece->IsStatic()) {
+        m_Sprint = false;
+
+        if(!b_End) {
+            m_CurrentPiece = m_pieceBag.GetNextPiece();
+            m_PieceFactory->ReloadPosition(m_CurrentPiece);
+            m_PieceFactory->ReloadVelocity(m_CurrentPiece, m_Force);
+            m_CurrentPiece->SetStatic(false);
+        }
     }
 
     //All Piece action
@@ -131,7 +135,7 @@ void Game::Draw(double dt)
 
 void Game::Loop()
 {
-    while (!b_Quit || !b_End) {
+    while (!b_Quit && !b_End) {
         Timer::GetInstance()->Tick();
 
         // TODO: Change Event Handling
