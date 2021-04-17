@@ -16,9 +16,47 @@ Vec2 Block::GetPosition() const
 {
     return m_Pos;
 }
+
+Vec2 Block::GetPositionInBoard(int w,int h)
+{
+    float x,y;
+
+    if((w/2.0 - 21.0 * 5.0) > m_Pos.x)
+       x = 0;
+    else if((w/2.0 + 21.0 * 5.0) < m_Pos.x)
+       x = 10;
+    else if(w/2.0 > m_Pos.x)
+        x = floor((m_Pos.x-(w/2.0 - 21.0 * 5.0))/21);
+    else
+        x = floor((m_Pos.x-(w/2.0 - 21.0 * 5.0))/21);
+
+    if((h - 2*21) < m_Pos.y)
+        y = 0;
+    else if((h - 20*21) > m_Pos.y)
+        y = 19;
+    else
+        y = 20 - floor(((m_Pos.y-(h - 23*21))/21));
+
+    if(x == 0)
+    {
+        return Vec2(x,y);
+    }
+
+    return Vec2(x,y);
+}
+
 Vec2 Block::GetVelocity() const
 {
     return m_Vel;
+}
+
+bool Block::IsInBoard(int w,int h)
+{
+    if((w/2.0 - 21.0 * 5.0) < m_Pos.x && (w/2.0 + 21.0 * 6.0) > m_Pos.x)
+        if((h - 2*21) > m_Pos.y &&  (h - 23*21) < m_Pos.y)
+            return true;
+
+    return false;
 }
 
 // Setters
@@ -39,12 +77,13 @@ void Block::MultiplyForce(Vec2 force) {
 }
 
 void Block::Fall(double dt) {
+
     Vec2 temp_vec = m_Vel * dt;
     m_Pos += temp_vec;
 }
 
-void Block::Move(Vec2& velR) {
-    m_Pos += velR;
+void Block::Move(Vec2& vel) {
+    m_Pos += vel;
 }
 
 void Block::Sprint()

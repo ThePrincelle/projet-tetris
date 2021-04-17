@@ -8,15 +8,15 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    Menu m;
+    Game g = Game(1);
 
-    m.Init();
-    m.Loop();
+	g.Init();
+	g.Loop();
 
-    //Game g;
+	//Menu m;
 
-    //g.Init();
-    //g.Loop();
+    //m.Init();
+    //m.Loop();
 
     SDL_Quit();
 }

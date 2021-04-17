@@ -15,7 +15,7 @@ Form::Form(double x, double y, double vx, double vy, vBlock &blocks)
         if(m_Blocks[i] != nullptr)
         {
             float new_x = x+((i%4)*21);
-            float new_y = y+((floor(i/4)*21));
+            float new_y = y+((i/4)*21);
             Vec2 new_Pos = Vec2(new_x,new_y);
             Vec2 new_Vel = Vec2(vx, vy);
             m_Blocks[i]->SetPosition(new_Pos);
@@ -56,7 +56,7 @@ Vec2 Form::GetMaxRightPosition()
                 if (m_Blocks[i] != nullptr)
                     return m_Blocks[i]->GetPosition();
         modulo--;
-    }while(modulo != 0);
+    }while(modulo != -1);
     return Vec2(0,0); //Erreur
 }
 
@@ -111,12 +111,25 @@ void Form::MultiplyForce(Vec2 &force) {
             m_Blocks[i]->MultiplyForce(force);
 }
 
-void Form::Fall(double dt) {
+bool Form::Fall(double dt, Board* board, int w, int h) {
     Vec2 temp_vec = Vec2(0,m_Vel.y * dt);
     m_Pos += temp_vec;
     for(int i = 0; i<16; i++)
         if(m_Blocks[i] != nullptr)
+            if(m_Blocks[i]->IsInBoard(w,h))
+            {
+                Vec2 posInBoard = m_Blocks[i]->GetPositionInBoard(w,h);
+                if (board->IsContact(posInBoard,m_Blocks[i]))
+                {
+                    return false;
+                }
+            }
+
+    for(int i = 0; i<16; i++)
+        if(m_Blocks[i] != nullptr)
             m_Blocks[i]->Fall(dt);
+
+    return true;
 }
 
 void Form::Move(Vec2 & vel)
@@ -124,7 +137,33 @@ void Form::Move(Vec2 & vel)
     m_Pos += vel;
     for(int i = 0; i<16; i++)
         if(m_Blocks[i] != nullptr)
-            m_Blocks[i]->Move(vel);
+        {
+           m_Blocks[i]->Move(vel);
+        }
+}
+
+bool Form::MoveRight(Vec2 & vel, Board* board, int w, int h)
+{
+    for(int i = 0; i<16; i++)
+        if(m_Blocks[i] != nullptr)
+        {
+            if(board->IsContactRight(m_Blocks[i]->GetPositionInBoard(w,h),m_Blocks[i]))
+                return false;
+        }
+    this->Move(vel);
+    return true;
+}
+
+bool Form::MoveLeft(Vec2 & vel, Board* board, int w, int h)
+{
+    for(int i = 0; i<16; i++)
+        if(m_Blocks[i] != nullptr)
+        {
+            if(board->IsContactLeft(m_Blocks[i]->GetPositionInBoard(w,h),m_Blocks[i]))
+                return false;
+        }
+    this->Move(vel);
+    return true;
 }
 
 void Form::Sprint()

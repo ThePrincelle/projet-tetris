@@ -96,14 +96,20 @@ void Piece::MultiplyForce(Vec2 force) {
         temp_form->MultiplyForce(force);
 }
 
-void Piece::Fall(double dt, int windowHeight) {
+void Piece::Fall(double dt, Board* board, int w, int h)
+{
+    bool resFall = true;
+
     if(!m_Static)
         for(Form* temp_form : m_Forms)
-            temp_form->Fall(dt);
-    // Collision bords
-    if (GetMaxDownPosition().y > (float)( windowHeight - 3*21))
-        if(!m_Static)
-            Lock();
+            if(temp_form != nullptr)
+            {
+                resFall = temp_form->Fall(dt, board,w,h);
+                if(!resFall)
+                {
+                    break;
+                }
+            }
 
     if(GetMaxUpPosition().y < 1) {
         if(!m_Static){
@@ -111,29 +117,48 @@ void Piece::Fall(double dt, int windowHeight) {
         }
         //End game
     }
+
+    // Collisions
+    if (!resFall)
+        if(!m_Static)
+        {
+            Form*  toto = GetCurrentForm();
+            board->AssignBlocks(GetBlocks(), w, h);
+            Lock();
+        }
+
 }
 
-void  Piece::MoveRight()
+void  Piece::MoveRight(Board* board)
 {
     Vec2 temp_vec = Vec2(21,0);
     if(!m_Static)
         for(Form* temp_form : m_Forms)
-            temp_form->Move(temp_vec);
+            if(temp_form != nullptr)
+            {
+                temp_form->Move(temp_vec);
+            }
 }
 
-void  Piece::Move( Vec2 pos)
+void  Piece::Move( Vec2 pos, bool forceMove = false)
 {
-    if(!m_Static)
+    if(!m_Static || forceMove)
         for(Form* temp_form : m_Forms)
-            temp_form->Move(pos);
+            if(temp_form != nullptr)
+            {
+                temp_form->Move(pos);
+            }
 }
 
-void  Piece::MoveLeft()
+void  Piece::MoveLeft(Board* board)
 {
     Vec2 temp_vec = Vec2(-21,0);
     if(!m_Static)
         for(Form* temp_form : m_Forms)
-            temp_form->Move(temp_vec);
+            if(temp_form != nullptr)
+            {
+                temp_form->Move(temp_vec);
+            }
 }
 
 void Piece::RotateRight()
@@ -277,8 +302,8 @@ Piece* PieceFactory::CreatePiece(TetrisPiece typePiece, double x, double y, doub
             forms.push_back(new  Form(x, y, vx, vy, formL3Blocks));
 
             vBlock formL4Blocks = {
+                    nullptr, nullptr, nullptr, nullptr,
                     (new Block()), (new Block()), nullptr, nullptr,
-                    nullptr,       (new Block()), nullptr, nullptr,
                     nullptr,       (new Block()), nullptr, nullptr,
                     nullptr,       (new Block()), nullptr, nullptr,
             };

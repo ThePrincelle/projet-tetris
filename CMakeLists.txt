@@ -25,7 +25,9 @@ function(ADD_PRG)
 	target_compile_definitions(${ADD_PRG_TARGET} PUBLIC _USE_MATH_DEFINES)
 endfunction()
 
-ADD_PRG(TARGET TP_CPP_SDL SOURCES window_surface.h window_surface.cpp surface.h surface.cpp sprite.h sprite.cpp vec2.h vec2.cpp block.h block.cpp form.h form.cpp piece.h piece.cpp pieceBag.h pieceBag.cpp timer.h timer.cpp game.h game.cpp menu.cpp menu.h main.cpp)
+ADD_PRG(TARGET TP_CPP_SDL SOURCES window_surface.h window_surface.cpp surface.h surface.cpp sprite.h sprite.cpp vec2.h vec2.cpp block.h block.cpp form.h form.cpp piece.h piece.cpp pieceBag.h pieceBag.cpp board.h board.cpp timer.h timer.cpp game.h game.cpp menu.cpp menu.h main.cpp)
+
+
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/textures.bmp
 	DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/)

@@ -4,8 +4,9 @@
 #include "surface.h"
 #include "sprite.h"
 
-#ifndef _BALL_H_
-#define _BALL_H_
+
+#ifndef _BLOCK_H_
+#define _BLOCK_H_
 
 class Block {
     // Properties
@@ -22,6 +23,8 @@ class Block {
         // Getters
         Vec2 GetPosition() const;
         Vec2 GetVelocity() const;
+        Vec2 GetPositionInBoard(int w,int h);
+        bool IsInBoard(int w,int h);
 
         // Setters
         void SetPosition(Vec2 &pos);
@@ -31,13 +34,11 @@ class Block {
         void AddForce(Vec2 force);
         void MultiplyForce(Vec2 force);
         void Fall(double dt);
-        void Move(Vec2& velR);
+        void Move(Vec2& vel);
         void Sprint();
         void StopSprint();
         void SelfPaint(WindowSurface* winSurf, Sprite color);
         void Lock();
-
-
 };
 
 

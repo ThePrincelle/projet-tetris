@@ -36,9 +36,9 @@ Piece* PieceBag::GetNextPiece()
     auto typePiece = (TetrisPiece)pieceNumber;
 
     for(Piece* temp_piece : m_Hand)
-        temp_piece->Move(Vec2(0,-86));
+        temp_piece->Move(Vec2(0,-86),true);
 
-    m_Hand.push_back(m_PieceFactory->CreatePiece(typePiece, (w/4)*3 + 60,20+3*86));
+    m_Hand.push_back(m_PieceFactory->CreatePiece(typePiece, (w/4)*3 + 60,20+2*86));
     return res;
 }
 
