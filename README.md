@@ -1,7 +1,7 @@
 ![Logo Tetris](./logo_tetris.png)
 # Projet Tetris
 
-[![Build Status](https://drone.princelle.org/api/badges/princelle/projet-tetris/status.svg)](https://drone.princelle.org/princelle/projet-tetris)
+[![Build & Compile](https://github.com/ThePrincelle/projet-tetris/actions/workflows/build-and-compile.yml/badge.svg)](https://github.com/ThePrincelle/projet-tetris/actions/workflows/build-and-compile.yml)
 
 <br/>
 
