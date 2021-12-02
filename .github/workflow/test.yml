@@ -1,0 +1,23 @@
+name: Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Build
+        run: docker run -v $PWD:/srv -w/srv docker.io/theprincemax/tetris-cpp-tester cmake .
+
+      - name: Compile
+        run: docker run -v $PWD:/srv -w/srv docker.io/theprincemax/tetris-cpp-tester make
