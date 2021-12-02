@@ -1,15 +1,13 @@
 ![Logo Tetris](./logo_tetris.png)
 # Projet Tetris
 
-[![Build & Compile](https://github.com/ThePrincelle/projet-tetris/actions/workflows/build-and-compile.yml/badge.svg)](https://github.com/ThePrincelle/projet-tetris/actions/workflows/build-and-compile.yml)
+[![Build & Compile](https://github.com/ThePrincelle/projet-tetris/actions/workflows/build-and-compile.yml/badge.svg?branch=master)](https://github.com/ThePrincelle/projet-tetris/actions/workflows/build-and-compile.yml)
 
 <br/>
 
 **Membres du binôme :**
 - [Hugo Brua](mailto:hbrua@etu.unistra.fr)
 - [Maxime Princelle](https://contact.princelle.org)
-
-<br/>
 
 ---
 
